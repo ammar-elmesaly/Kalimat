@@ -1,3 +1,1020 @@
-[gd_scene format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=3 format=3 uid="uid://vsb4akym35c"]
 
-[node name="main" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
+[ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="2_5x7mt"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="rows" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.5
+offset_top = 60.0
+offset_right = 137.5
+offset_bottom = 360.0
+grow_horizontal = 2
+theme_override_constants/separation = 60
+
+[node name="row_0" type="HBoxContainer" parent="rows"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="slot_0" type="Control" parent="rows/row_0"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_0"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_0/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="rows/row_0"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_1"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_0/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="rows/row_0"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_2"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_0/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="rows/row_0"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_3"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_0/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="rows/row_0"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_4"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_0/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="rows/row_0"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_5"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_0/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="row_1" type="HBoxContainer" parent="rows"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="slot_0" type="Control" parent="rows/row_1"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_0"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_1/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="rows/row_1"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_1"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_1/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="rows/row_1"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_2"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_1/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="rows/row_1"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_3"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_1/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="rows/row_1"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_4"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_1/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="rows/row_1"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_5"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_1/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="row_2" type="HBoxContainer" parent="rows"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="slot_0" type="Control" parent="rows/row_2"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_0"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_2/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="rows/row_2"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_1"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_2/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="rows/row_2"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_2"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_2/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="rows/row_2"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_3"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_2/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="rows/row_2"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_4"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_2/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="rows/row_2"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_5"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_2/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="row_3" type="HBoxContainer" parent="rows"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="slot_0" type="Control" parent="rows/row_3"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_0"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_3/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="rows/row_3"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_1"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_3/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="rows/row_3"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_2"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_3/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="rows/row_3"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_3"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_3/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="rows/row_3"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_4"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_3/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="rows/row_3"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_5"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_3/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="row_4" type="HBoxContainer" parent="rows"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="slot_0" type="Control" parent="rows/row_4"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_0"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_4/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="rows/row_4"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_1"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_4/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="rows/row_4"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_2"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_4/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="rows/row_4"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_3"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_4/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="rows/row_4"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_4"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_4/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="rows/row_4"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_5"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_4/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="row_5" type="HBoxContainer" parent="rows"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="slot_0" type="Control" parent="rows/row_5"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_0"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_5/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="rows/row_5"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_1"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_5/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="rows/row_5"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_2"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_5/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="rows/row_5"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_3"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_5/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="rows/row_5"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_4"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_5/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="rows/row_5"]
+layout_mode = 2
+
+[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_5"]
+texture = ExtResource("1_xslwc")
+
+[node name="Label" type="Label" parent="rows/row_5/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 70
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
