@@ -1,39 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=7 format=3 uid="uid://vsb4akym35c"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_hkxhb"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
 [ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="2_5x7mt"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70r5x"]
+texture = ExtResource("1_xslwc")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_scggn"]
+texture = ExtResource("1_xslwc")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_snudb"]
+texture = ExtResource("1_xslwc")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
 [node name="main" type="Control"]
+layout_direction = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hkxhb")
+metadata/_edit_vertical_guides_ = [1160.0, 1143.0]
 
-[node name="rows" type="VBoxContainer" parent="."]
+[node name="words" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.5
+offset_top = 47.0
+offset_right = 34.5
+offset_bottom = 47.0
+grow_horizontal = 2
+
+[node name="rows" type="VBoxContainer" parent="words"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -137.5
-offset_top = 60.0
 offset_right = 137.5
-offset_bottom = 360.0
+offset_bottom = 300.0
 grow_horizontal = 2
 theme_override_constants/separation = 60
 
-[node name="row_0" type="HBoxContainer" parent="rows"]
+[node name="row_0" type="HBoxContainer" parent="words/rows"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/separation = 55
 
-[node name="slot_0" type="Control" parent="rows/row_0"]
+[node name="slot_0" type="Control" parent="words/rows/row_0"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_0"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_0/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_0/slot_0"]
+[node name="Label" type="Label" parent="words/rows/row_0/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -48,19 +78,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="rows/row_0"]
+[node name="slot_1" type="Control" parent="words/rows/row_0"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_1"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_0/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_0/slot_1"]
+[node name="Label" type="Label" parent="words/rows/row_0/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -75,19 +105,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="rows/row_0"]
+[node name="slot_2" type="Control" parent="words/rows/row_0"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_2"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_0/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_0/slot_2"]
+[node name="Label" type="Label" parent="words/rows/row_0/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -102,19 +132,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="rows/row_0"]
+[node name="slot_3" type="Control" parent="words/rows/row_0"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_3"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_0/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_0/slot_3"]
+[node name="Label" type="Label" parent="words/rows/row_0/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,19 +159,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="rows/row_0"]
+[node name="slot_4" type="Control" parent="words/rows/row_0"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_4"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_0/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_0/slot_4"]
+[node name="Label" type="Label" parent="words/rows/row_0/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -156,50 +186,24 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_5" type="Control" parent="rows/row_0"]
+[node name="row_1" type="HBoxContainer" parent="words/rows"]
 layout_mode = 2
-
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_0/slot_5"]
-texture = ExtResource("1_xslwc")
-
-[node name="Label" type="Label" parent="rows/row_0/slot_5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -81.0
-offset_right = 28.5
-offset_bottom = 81.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="row_1" type="HBoxContainer" parent="rows"]
-layout_mode = 2
 theme_override_constants/separation = 55
 
-[node name="slot_0" type="Control" parent="rows/row_1"]
+[node name="slot_0" type="Control" parent="words/rows/row_1"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_0"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_1/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_1/slot_0"]
+[node name="Label" type="Label" parent="words/rows/row_1/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -214,19 +218,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="rows/row_1"]
+[node name="slot_1" type="Control" parent="words/rows/row_1"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_1"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_1/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_1/slot_1"]
+[node name="Label" type="Label" parent="words/rows/row_1/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -241,19 +245,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="rows/row_1"]
+[node name="slot_2" type="Control" parent="words/rows/row_1"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_2"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_1/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_1/slot_2"]
+[node name="Label" type="Label" parent="words/rows/row_1/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -268,19 +272,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="rows/row_1"]
+[node name="slot_3" type="Control" parent="words/rows/row_1"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_3"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_1/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_1/slot_3"]
+[node name="Label" type="Label" parent="words/rows/row_1/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -295,19 +299,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="rows/row_1"]
+[node name="slot_4" type="Control" parent="words/rows/row_1"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_4"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_1/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_1/slot_4"]
+[node name="Label" type="Label" parent="words/rows/row_1/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -322,50 +326,24 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_5" type="Control" parent="rows/row_1"]
+[node name="row_2" type="HBoxContainer" parent="words/rows"]
 layout_mode = 2
-
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_1/slot_5"]
-texture = ExtResource("1_xslwc")
-
-[node name="Label" type="Label" parent="rows/row_1/slot_5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -81.0
-offset_right = 28.5
-offset_bottom = 81.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="row_2" type="HBoxContainer" parent="rows"]
-layout_mode = 2
 theme_override_constants/separation = 55
 
-[node name="slot_0" type="Control" parent="rows/row_2"]
+[node name="slot_0" type="Control" parent="words/rows/row_2"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_0"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_2/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_2/slot_0"]
+[node name="Label" type="Label" parent="words/rows/row_2/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -380,19 +358,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="rows/row_2"]
+[node name="slot_1" type="Control" parent="words/rows/row_2"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_1"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_2/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_2/slot_1"]
+[node name="Label" type="Label" parent="words/rows/row_2/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -407,19 +385,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="rows/row_2"]
+[node name="slot_2" type="Control" parent="words/rows/row_2"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_2"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_2/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_2/slot_2"]
+[node name="Label" type="Label" parent="words/rows/row_2/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -434,19 +412,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="rows/row_2"]
+[node name="slot_3" type="Control" parent="words/rows/row_2"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_3"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_2/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_2/slot_3"]
+[node name="Label" type="Label" parent="words/rows/row_2/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -461,19 +439,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="rows/row_2"]
+[node name="slot_4" type="Control" parent="words/rows/row_2"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_4"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_2/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_2/slot_4"]
+[node name="Label" type="Label" parent="words/rows/row_2/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -488,50 +466,24 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_5" type="Control" parent="rows/row_2"]
+[node name="row_3" type="HBoxContainer" parent="words/rows"]
 layout_mode = 2
-
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_2/slot_5"]
-texture = ExtResource("1_xslwc")
-
-[node name="Label" type="Label" parent="rows/row_2/slot_5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -81.0
-offset_right = 28.5
-offset_bottom = 81.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="row_3" type="HBoxContainer" parent="rows"]
-layout_mode = 2
 theme_override_constants/separation = 55
 
-[node name="slot_0" type="Control" parent="rows/row_3"]
+[node name="slot_0" type="Control" parent="words/rows/row_3"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_0"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_3/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_3/slot_0"]
+[node name="Label" type="Label" parent="words/rows/row_3/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -546,19 +498,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="rows/row_3"]
+[node name="slot_1" type="Control" parent="words/rows/row_3"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_1"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_3/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_3/slot_1"]
+[node name="Label" type="Label" parent="words/rows/row_3/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -573,19 +525,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="rows/row_3"]
+[node name="slot_2" type="Control" parent="words/rows/row_3"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_2"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_3/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_3/slot_2"]
+[node name="Label" type="Label" parent="words/rows/row_3/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -600,19 +552,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="rows/row_3"]
+[node name="slot_3" type="Control" parent="words/rows/row_3"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_3"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_3/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_3/slot_3"]
+[node name="Label" type="Label" parent="words/rows/row_3/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -627,19 +579,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="rows/row_3"]
+[node name="slot_4" type="Control" parent="words/rows/row_3"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_4"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_3/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_3/slot_4"]
+[node name="Label" type="Label" parent="words/rows/row_3/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -654,50 +606,24 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_5" type="Control" parent="rows/row_3"]
+[node name="row_4" type="HBoxContainer" parent="words/rows"]
 layout_mode = 2
-
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_3/slot_5"]
-texture = ExtResource("1_xslwc")
-
-[node name="Label" type="Label" parent="rows/row_3/slot_5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -81.0
-offset_right = 28.5
-offset_bottom = 81.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="row_4" type="HBoxContainer" parent="rows"]
-layout_mode = 2
 theme_override_constants/separation = 55
 
-[node name="slot_0" type="Control" parent="rows/row_4"]
+[node name="slot_0" type="Control" parent="words/rows/row_4"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_0"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_4/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_4/slot_0"]
+[node name="Label" type="Label" parent="words/rows/row_4/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -712,19 +638,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="rows/row_4"]
+[node name="slot_1" type="Control" parent="words/rows/row_4"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_1"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_4/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_4/slot_1"]
+[node name="Label" type="Label" parent="words/rows/row_4/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -739,19 +665,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="rows/row_4"]
+[node name="slot_2" type="Control" parent="words/rows/row_4"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_2"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_4/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_4/slot_2"]
+[node name="Label" type="Label" parent="words/rows/row_4/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -766,19 +692,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="rows/row_4"]
+[node name="slot_3" type="Control" parent="words/rows/row_4"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_3"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_4/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_4/slot_3"]
+[node name="Label" type="Label" parent="words/rows/row_4/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -793,19 +719,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="rows/row_4"]
+[node name="slot_4" type="Control" parent="words/rows/row_4"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_4"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_4/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_4/slot_4"]
+[node name="Label" type="Label" parent="words/rows/row_4/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -820,50 +746,24 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_5" type="Control" parent="rows/row_4"]
+[node name="row_5" type="HBoxContainer" parent="words/rows"]
 layout_mode = 2
-
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_4/slot_5"]
-texture = ExtResource("1_xslwc")
-
-[node name="Label" type="Label" parent="rows/row_4/slot_5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -81.0
-offset_right = 28.5
-offset_bottom = 81.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="row_5" type="HBoxContainer" parent="rows"]
-layout_mode = 2
 theme_override_constants/separation = 55
 
-[node name="slot_0" type="Control" parent="rows/row_5"]
+[node name="slot_0" type="Control" parent="words/rows/row_5"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_0"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_5/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_5/slot_0"]
+[node name="Label" type="Label" parent="words/rows/row_5/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -878,19 +778,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="rows/row_5"]
+[node name="slot_1" type="Control" parent="words/rows/row_5"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_1"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_5/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_5/slot_1"]
+[node name="Label" type="Label" parent="words/rows/row_5/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -905,19 +805,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="rows/row_5"]
+[node name="slot_2" type="Control" parent="words/rows/row_5"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_2"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_5/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_5/slot_2"]
+[node name="Label" type="Label" parent="words/rows/row_5/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -932,19 +832,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="rows/row_5"]
+[node name="slot_3" type="Control" parent="words/rows/row_5"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_3"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_5/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_5/slot_3"]
+[node name="Label" type="Label" parent="words/rows/row_5/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -959,19 +859,19 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="rows/row_5"]
+[node name="slot_4" type="Control" parent="words/rows/row_5"]
 layout_mode = 2
 
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_4"]
+[node name="EmptySlot" type="Sprite2D" parent="words/rows/row_5/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="rows/row_5/slot_4"]
+[node name="Label" type="Label" parent="words/rows/row_5/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -986,35 +886,300 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_5" type="Control" parent="rows/row_5"]
-layout_mode = 2
-
-[node name="EmptySlot" type="Sprite2D" parent="rows/row_5/slot_5"]
-texture = ExtResource("1_xslwc")
-
-[node name="Label" type="Label" parent="rows/row_5/slot_5"]
+[node name="keyboard" type="Control" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -81.0
-offset_right = 28.5
-offset_bottom = 81.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -24.0
 grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="keyboard"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -277.0
+offset_top = -226.0
+offset_right = 277.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 10
+columns = 8
+
+[node name="key_0" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 70
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 0
-metadata/_edit_use_anchors_ = true
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ا"
+
+[node name="key_1" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ب"
+
+[node name="key_2" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ت"
+
+[node name="key_3" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ث"
+
+[node name="key_4" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ج"
+
+[node name="key_5" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ح"
+
+[node name="key_6" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "خ"
+
+[node name="key_7" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "د"
+
+[node name="key_8" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ذ"
+
+[node name="key_9" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ر"
+
+[node name="key_10" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ز"
+
+[node name="key_11" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "س"
+
+[node name="key_12" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ش"
+
+[node name="key_13" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ص"
+
+[node name="key_14" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ض"
+
+[node name="key_15" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ط"
+
+[node name="key_16" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ظ"
+
+[node name="key_17" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ع"
+
+[node name="key_18" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "غ"
+
+[node name="key_19" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ف"
+
+[node name="key_20" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ق"
+
+[node name="key_21" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ك"
+
+[node name="key_22" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ل"
+
+[node name="key_23" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "م"
+
+[node name="key_24" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ن"
+
+[node name="key_25" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ه"
+
+[node name="key_26" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "و"
+
+[node name="key_27" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ي"
+
+[node name="check" type="Button" parent="keyboard/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "جرِّب"
+
+[connection signal="pressed" from="keyboard/GridContainer/check" to="." method="_on_check_pressed"]
