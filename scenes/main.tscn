@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=12 format=3 uid="uid://vsb4akym35c"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hkxhb"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
 [ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="2_5x7mt"]
+[ext_resource type="Script" path="res://scenes/key_0.gd" id="4_legka"]
 [ext_resource type="Texture2D" uid="uid://v2gt2gqqgsx0" path="res://resources/delete.png" id="4_xy1eb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70r5x"]
@@ -939,6 +940,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ا"
+script = ExtResource("4_legka")
 
 [node name="key_1" type="Button" parent="keyboard/GridContainer"]
 layout_mode = 2
