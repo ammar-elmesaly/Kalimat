@@ -110,6 +110,7 @@ func _on_check_pressed() -> void:
 	var slot = get_node("words/rows").get_child(row).get_child(col)
 	slot.get_node("Slot").texture = selected
 	input_blocked = false
+	guessedWordArray = ["", "", "", "", ""]
 	
 func _on_erase_pressed() -> void:
 	if input_blocked:
