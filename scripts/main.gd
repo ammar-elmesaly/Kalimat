@@ -5,6 +5,9 @@ extends Control
 @onready var right = preload("res://resources/right_slot.png")
 @onready var selected = preload("res://resources/selected_slot.png")
 @onready var wrong = preload("res://resources/wrong_slot.png")
+@onready var volumeOff = preload("res://resources/volume-mute.svg")
+@onready var volumeUp = preload("res://resources/volume-up.svg")
+
 @onready var statusDict = {
 	"empty" : empty,
 	"misplaced" : misplaced,
@@ -22,11 +25,13 @@ var guessedWordArray : Array[String] = ["", "", "", "", ""]
 var statusArray = Array()
 
 var input_blocked : bool = false
+var muted : bool = false
+
 var dictionarySet : Dictionary
 
 func _ready() -> void:
 	dictionarySet = loadDictionary()
-	answer = randomWord(dictionarySet)
+	answer = "مقدام"
 	statusArray.resize(ALPHABET_LETTER_NUMBER)  # This sets the array for keeping keyboard buttons status
 	statusArray.fill("empty")					# (Yellow, Green, Dark Gray)
 	get_node("words/rows").get_child(row).get_child(col).get_node("Slot").texture = selected
@@ -46,7 +51,7 @@ func _on_key_pressed(letter : String) -> void:
 	slot = get_node("words/rows").get_child(row).get_child(col)
 	slot.get_node("Slot").texture = selected
 	# play click sound
-	get_node("sfx/click").play()
+	if !muted: get_node("sfx/click").play()
 
 func _on_check_pressed() -> void:
 	if input_blocked:
@@ -78,17 +83,17 @@ func _on_check_pressed() -> void:
 		if guessedWordArray.slice(i).count(guessedWordArray[i]) > answerArray.count(guessedWordArray[i]) and i != charIndexInAnswer:
 			slotSprite.texture = wrong
 			setStatus(styleBox, alphabetIndex, "wrong")
-			get_node("sfx/wrong").play()
+			if !muted: get_node("sfx/wrong").play()
 			
 		elif i == charIndexInAnswer:
 				slotSprite.texture = right
 				setStatus(styleBox, alphabetIndex, "right")
 				answerArray[i] = ""
-				get_node("sfx/right").play()
+				if !muted: get_node("sfx/right").play()
 		else:
 			slotSprite.texture = misplaced
 			setStatus(styleBox, alphabetIndex, "misplaced")
-			get_node("sfx/wrong").play()
+			if !muted: get_node("sfx/wrong").play()
 			
 		# The keyboard key node
 		var keyboardKey = get_node("keyboard/GridContainer").get_child(alphabetIndex)
@@ -99,7 +104,7 @@ func _on_check_pressed() -> void:
 		
 	if ("".join(guessedWordArray) == answer):
 		print("You win!")
-		get_node("sfx/win").play()
+		if !muted: get_node("sfx/win").play()
 		return
 	col = 0
 	row += 1
@@ -152,3 +157,18 @@ func randomWord(dict : Dictionary) -> String:
 			return word
 		i += 1
 	return ""
+
+
+func _on_mute_pressed() -> void:
+	var styleBox = StyleBoxTexture.new()
+	
+	if muted == false:
+		styleBox.texture = volumeOff
+		muted = true
+	else:
+		styleBox.texture = volumeUp
+		muted = false
+	
+	get_node("controls/mute").add_theme_stylebox_override("normal", styleBox)
+	get_node("controls/mute").add_theme_stylebox_override("pressed", styleBox)
+	get_node("controls/mute").add_theme_stylebox_override("hover", styleBox)

@@ -1,16 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=34 format=3 uid="uid://vsb4akym35c"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hkxhb"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
 [ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="2_5x7mt"]
 [ext_resource type="Texture2D" uid="uid://chomveywrgmam" path="res://resources/sky_small_blurred.png" id="2_uumms"]
-[ext_resource type="Script" path="res://scenes/key_0.gd" id="4_legka"]
-[ext_resource type="Texture2D" uid="uid://v2gt2gqqgsx0" path="res://resources/delete.png" id="4_xy1eb"]
+[ext_resource type="Texture2D" uid="uid://51sluuder6os" path="res://resources/new_del.png" id="4_k0jtq"]
+[ext_resource type="Texture2D" uid="uid://wng30vf46bas" path="res://resources/enter.png" id="4_l0hxa"]
 [ext_resource type="AudioStream" uid="uid://bnddumbtltoxo" path="res://resources/sfx/click.mp3" id="7_cxv03"]
 [ext_resource type="Script" path="res://scripts/parallax_background.gd" id="8_cstcv"]
 [ext_resource type="AudioStream" uid="uid://dc3vlllsxt5t8" path="res://resources/sfx/enter.mp3" id="8_l5tyu"]
 [ext_resource type="AudioStream" uid="uid://dtycutxbxxgyw" path="res://resources/sfx/wrong.mp3" id="8_u8q6v"]
 [ext_resource type="AudioStream" uid="uid://ycq4e82j062j" path="res://resources/sfx/right.mp3" id="9_d16bv"]
+[ext_resource type="Texture2D" uid="uid://dehoa3jli78as" path="res://resources/pause_normal.png" id="12_uwlf8"]
+[ext_resource type="Texture2D" uid="uid://cfqsh5a823nmg" path="res://resources/pause_pressed.png" id="13_q8rc5"]
+[ext_resource type="Texture2D" uid="uid://oniqmd3dpc4r" path="res://resources/volume-up.svg" id="14_pjfkq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70r5x"]
 texture = ExtResource("1_xslwc")
@@ -27,14 +30,55 @@ texture = ExtResource("1_xslwc")
 texture_margin_left = 20.0
 texture_margin_right = 20.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7ocb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ugrw"]
+texture = ExtResource("4_l0hxa")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tyr4w"]
+texture = ExtResource("4_l0hxa")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_46qjj"]
+texture = ExtResource("4_l0hxa")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jndie"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6fp8"]
-texture = ExtResource("4_xy1eb")
+texture = ExtResource("4_k0jtq")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tng7k"]
-texture = ExtResource("4_xy1eb")
+texture = ExtResource("4_k0jtq")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sluw"]
-texture = ExtResource("4_xy1eb")
+texture = ExtResource("4_k0jtq")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avech"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_84sy7"]
+texture = ExtResource("12_uwlf8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xb0gw"]
+texture = ExtResource("13_q8rc5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_02sy3"]
+texture = ExtResource("12_uwlf8")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eh0ew"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xk3vp"]
+texture = ExtResource("14_pjfkq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l1cdg"]
+texture = ExtResource("14_pjfkq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yytae"]
+texture = ExtResource("14_pjfkq")
 
 [node name="main" type="Control"]
 layout_direction = 3
@@ -946,7 +990,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ا"
-script = ExtResource("4_legka")
 
 [node name="key_1" type="Button" parent="keyboard/GridContainer"]
 layout_mode = 2
@@ -1210,23 +1253,25 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ء"
 
 [node name="check" type="Button" parent="keyboard"]
-layout_mode = 2
+layout_mode = 0
 offset_left = 167.5
 offset_top = -49.0
 offset_right = 250.5
 theme_override_fonts/font = ExtResource("2_5x7mt")
 theme_override_font_sizes/font_size = 25
-theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
-theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n7ocb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_1ugrw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tyr4w")
+theme_override_styles/normal = SubResource("StyleBoxTexture_46qjj")
 text = "جرِّب"
 
 [node name="erase" type="Button" parent="keyboard"]
-custom_minimum_size = Vector2(233, 0)
 layout_mode = 2
-offset_left = 258.5
+offset_left = 259.5
 offset_top = -49.0
-offset_right = 491.5
+offset_right = 323.5
+offset_bottom = 2.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jndie")
 theme_override_styles/hover = SubResource("StyleBoxTexture_e6fp8")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_tng7k")
 theme_override_styles/normal = SubResource("StyleBoxTexture_1sluw")
@@ -1262,5 +1307,34 @@ offset_bottom = 876.0
 texture = ExtResource("2_uumms")
 stretch_mode = 1
 
+[node name="controls" type="VBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -17.5
+offset_right = 72.0
+offset_bottom = 83.5
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="pause" type="Button" parent="controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_avech")
+theme_override_styles/hover = SubResource("StyleBoxTexture_84sy7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xb0gw")
+theme_override_styles/normal = SubResource("StyleBoxTexture_02sy3")
+
+[node name="mute" type="Button" parent="controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eh0ew")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xk3vp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_l1cdg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
+
 [connection signal="pressed" from="keyboard/check" to="." method="_on_check_pressed"]
 [connection signal="pressed" from="keyboard/erase" to="." method="_on_erase_pressed"]
+[connection signal="pressed" from="controls/mute" to="." method="_on_mute_pressed"]
