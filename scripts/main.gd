@@ -26,6 +26,7 @@ var statusArray = Array()
 
 var input_blocked : bool = false
 var muted : bool = false
+var paused : bool = false
 
 var dictionarySet : Dictionary
 
@@ -34,24 +35,24 @@ func _ready() -> void:
 	answer = "مقدام"
 	statusArray.resize(ALPHABET_LETTER_NUMBER)  # This sets the array for keeping keyboard buttons status
 	statusArray.fill("empty")					# (Yellow, Green, Dark Gray)
-	get_node("words/rows").get_child(row).get_child(col).get_node("Slot").texture = selected
+	get_node("game/words/rows").get_child(row).get_child(col).get_node("Slot").texture = selected
 	for i in range(30):
-		var key = get_node("keyboard/GridContainer/key_" + str(i))
+		var key = get_node("game/keyboard/GridContainer/key_" + str(i))
 		key.pressed.connect(_on_key_pressed.bind(key.text))  # This sets the buttons for listenting and binds the text as an argument
 
 func _on_key_pressed(letter : String) -> void:
 	if input_blocked:
 		return
-	var slot = get_node("words/rows").get_child(row).get_child(col)
+	var slot = get_node("game/words/rows").get_child(row).get_child(col)
 	slot.get_node("Label").text = letter
 	slot.get_node("Slot").texture = empty
 	guessedWordArray[col] = letter
 	if (col != WORD_LENGTH - 1):
 		col += 1
-	slot = get_node("words/rows").get_child(row).get_child(col)
+	slot = get_node("game/words/rows").get_child(row).get_child(col)
 	slot.get_node("Slot").texture = selected
 	# play click sound
-	if !muted: get_node("sfx/click").play()
+	if !muted: get_node("game/sfx/click").play()
 
 func _on_check_pressed() -> void:
 	if input_blocked:
@@ -60,14 +61,13 @@ func _on_check_pressed() -> void:
 	const alphabet : String = "ابتثجحخدذرزسشصضطظعغفقكلمنهويةء"
 	var answerArray = answer.split("")
 	var guessedWord : String = ''.join(guessedWordArray)
-	print(dictionarySet.has(guessedWord))
+	
 	if len(guessedWord) != 5 or !dictionarySet.has(guessedWord):
 		input_blocked = false
 		return
+		
 	for i in range(WORD_LENGTH):
-		
 		await get_tree().create_timer(0.5).timeout  # time delay between each iteration
-		
 		# Set a new style box for each letter in the keyboard instead of them sharing the same 
 		# Stylebox
 		var styleBox = StyleBoxTexture.new()
@@ -75,7 +75,7 @@ func _on_check_pressed() -> void:
 		styleBox.texture_margin_right = 20
 		
 		# the sprite of the letter slot (in the words grid)
-		var slotSprite = get_node("words/rows").get_child(row).get_child(i).get_node("Slot")
+		var slotSprite = get_node("game/words/rows").get_child(row).get_child(i).get_node("Slot")
 		var alphabetIndex : int = alphabet.find(guessedWordArray[i])  # index of the letter in Arabic Alphabet
 		
 		var charIndexInAnswer : int = answerArray.find(guessedWordArray[i], 0)  # if letter found in word it stores its index in the answer word
@@ -83,28 +83,31 @@ func _on_check_pressed() -> void:
 		if guessedWordArray.slice(i).count(guessedWordArray[i]) > answerArray.count(guessedWordArray[i]) and i != charIndexInAnswer:
 			slotSprite.texture = wrong
 			setStatus(styleBox, alphabetIndex, "wrong")
-			if !muted: get_node("sfx/wrong").play()
+			if !muted: get_node("game/sfx/wrong").play()
 			
 		elif i == charIndexInAnswer:
 				slotSprite.texture = right
 				setStatus(styleBox, alphabetIndex, "right")
 				answerArray[i] = ""
-				if !muted: get_node("sfx/right").play()
+				if !muted: get_node("game/sfx/right").play()
 		else:
 			slotSprite.texture = misplaced
 			setStatus(styleBox, alphabetIndex, "misplaced")
-			if !muted: get_node("sfx/wrong").play()
+			if !muted: get_node("game/sfx/wrong").play()
 			
 		# The keyboard key node
-		var keyboardKey = get_node("keyboard/GridContainer").get_child(alphabetIndex)
+		var keyboardKey = get_node("game/keyboard/GridContainer").get_child(alphabetIndex)
 		
 		keyboardKey.add_theme_stylebox_override("normal", styleBox)
 		keyboardKey.add_theme_stylebox_override("pressed", styleBox)
 		keyboardKey.add_theme_stylebox_override("hover", styleBox)
 		
+		while paused:  # this stops for loop while pausing
+			await get_tree().process_frame
+		
 	if ("".join(guessedWordArray) == answer):
 		print("You win!")
-		if !muted: get_node("sfx/win").play()
+		if !muted: get_node("game/sfx/win").play()
 		return
 	col = 0
 	row += 1
@@ -112,7 +115,7 @@ func _on_check_pressed() -> void:
 		print("you lose")
 		print(answer)
 		return
-	var slot = get_node("words/rows").get_child(row).get_child(col)
+	var slot = get_node("game/words/rows").get_child(row).get_child(col)
 	slot.get_node("Slot").texture = selected
 	input_blocked = false
 	guessedWordArray = ["", "", "", "", ""]
@@ -120,13 +123,13 @@ func _on_check_pressed() -> void:
 func _on_erase_pressed() -> void:
 	if input_blocked:
 		return
-	var slot = get_node("words/rows").get_child(row).get_child(col)
+	var slot = get_node("game/words/rows").get_child(row).get_child(col)
 	slot.get_node("Label").text = ""
 	slot.get_node("Slot").texture = empty
 	guessedWordArray[col] = ""
 	if (col != 0):
 		col -= 1
-	slot = get_node("words/rows").get_child(row).get_child(col)
+	slot = get_node("game/words/rows").get_child(row).get_child(col)
 	slot.get_node("Slot").texture = selected
 
 func setStatus(styleBox : StyleBoxTexture, index : int, status : String) -> void:
@@ -169,6 +172,17 @@ func _on_mute_pressed() -> void:
 		styleBox.texture = volumeUp
 		muted = false
 	
-	get_node("controls/mute").add_theme_stylebox_override("normal", styleBox)
-	get_node("controls/mute").add_theme_stylebox_override("pressed", styleBox)
-	get_node("controls/mute").add_theme_stylebox_override("hover", styleBox)
+	get_node("game/controls/mute").add_theme_stylebox_override("normal", styleBox)
+	get_node("game/controls/mute").add_theme_stylebox_override("pressed", styleBox)
+	get_node("game/controls/mute").add_theme_stylebox_override("hover", styleBox)
+
+
+func _on_pause_pressed() -> void:
+	get_node("blur layer").visible = true
+	get_node("pause menu").visible = true
+	paused = true
+
+func _on_unpause_pressed() -> void:
+	get_node("blur layer").visible = false
+	get_node("pause menu").visible = false
+	paused = false
