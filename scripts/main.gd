@@ -32,7 +32,7 @@ var dictionarySet : Dictionary
 
 func _ready() -> void:
 	dictionarySet = loadDictionary()
-	answer = "مقدام"
+	answer = randomWord(dictionarySet)
 	statusArray.resize(ALPHABET_LETTER_NUMBER)  # This sets the array for keeping keyboard buttons status
 	statusArray.fill("empty")					# (Yellow, Green, Dark Gray)
 	get_node("game/words/rows").get_child(row).get_child(col).get_node("Slot").texture = selected
@@ -61,8 +61,9 @@ func _on_check_pressed() -> void:
 	const alphabet : String = "ابتثجحخدذرزسشصضطظعغفقكلمنهويةء"
 	var answerArray = answer.split("")
 	var guessedWord : String = ''.join(guessedWordArray)
-	
-	if len(guessedWord) != 5 or !dictionarySet.has(guessedWord):
+	# if a new dictionary is found, add this condition to the if-condition below:
+	# or !dictionarySet.has(guessedWord)
+	if len(guessedWord) != 5:
 		input_blocked = false
 		return
 		
@@ -106,14 +107,16 @@ func _on_check_pressed() -> void:
 			await get_tree().process_frame
 		
 	if ("".join(guessedWordArray) == answer):
-		print("You win!")
+		get_node("win screen").visible = true
+		get_node("shader layers/win layer").visible = true
 		if !muted: get_node("game/sfx/win").play()
 		return
 	col = 0
 	row += 1
 	if row > 5:
-		print("you lose")
-		print(answer)
+		get_node("lose screen/answer").text += answer
+		get_node("lose screen").visible = true
+		get_node("shader layers/lose layer").visible = true
 		return
 	var slot = get_node("game/words/rows").get_child(row).get_child(col)
 	slot.get_node("Slot").texture = selected
@@ -178,11 +181,14 @@ func _on_mute_pressed() -> void:
 
 
 func _on_pause_pressed() -> void:
-	get_node("blur layer").visible = true
+	get_node("shader layers/pause layer").visible = true
 	get_node("pause menu").visible = true
 	paused = true
 
 func _on_unpause_pressed() -> void:
-	get_node("blur layer").visible = false
+	get_node("shader layers/pause layer").visible = false
 	get_node("pause menu").visible = false
 	paused = false
+
+func _on_replay_pressed() -> void:
+	get_tree().reload_current_scene()

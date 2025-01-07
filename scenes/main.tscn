@@ -1,9 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=40 format=3 uid="uid://vsb4akym35c"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hkxhb"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
 [ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="2_5x7mt"]
-[ext_resource type="Shader" path="res://shaders/game.gdshader" id="2_s8h3y"]
+[ext_resource type="Shader" path="res://shaders/pause.gdshader" id="2_s8h3y"]
 [ext_resource type="Texture2D" uid="uid://chomveywrgmam" path="res://resources/sky_small_blurred.png" id="2_uumms"]
 [ext_resource type="Texture2D" uid="uid://51sluuder6os" path="res://resources/new_del.png" id="4_k0jtq"]
 [ext_resource type="Texture2D" uid="uid://wng30vf46bas" path="res://resources/enter.png" id="4_l0hxa"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://dehoa3jli78as" path="res://resources/pause_normal.png" id="12_uwlf8"]
 [ext_resource type="Texture2D" uid="uid://cfqsh5a823nmg" path="res://resources/pause_pressed.png" id="13_q8rc5"]
 [ext_resource type="Texture2D" uid="uid://oniqmd3dpc4r" path="res://resources/volume-up.svg" id="14_pjfkq"]
+[ext_resource type="Shader" path="res://shaders/win.gdshader" id="16_5aa60"]
+[ext_resource type="Shader" path="res://shaders/lose.gdshader" id="17_t54y0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70r5x"]
 texture = ExtResource("1_xslwc")
@@ -81,9 +83,19 @@ texture = ExtResource("14_pjfkq")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yytae"]
 texture = ExtResource("14_pjfkq")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpdrk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7s155"]
 shader = ExtResource("2_s8h3y")
-shader_parameter/lod = 3.0
+shader_parameter/lod = 2.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpdrk"]
+shader = ExtResource("16_5aa60")
+shader_parameter/lod = 2.8
+shader_parameter/green_boost = 1.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bimdd"]
+shader = ExtResource("17_t54y0")
+shader_parameter/lod = 2.8
+shader_parameter/red_boost = 2.2
 
 [node name="main" type="Control"]
 layout_direction = 3
@@ -1353,19 +1365,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_xk3vp")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_l1cdg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
 
-[node name="blur layer" type="CanvasLayer" parent="."]
-layer = 0
-visible = false
-
-[node name="blur" type="ColorRect" parent="blur layer"]
-material = SubResource("ShaderMaterial_vpdrk")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
 [node name="pause menu" type="CanvasLayer" parent="."]
 visible = false
 
@@ -1384,6 +1383,7 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_5x7mt")
 theme_override_font_sizes/font_size = 40
 text = "إيقاف مؤقت"
+horizontal_alignment = 1
 
 [node name="unpause" type="Button" parent="pause menu"]
 z_index = 8
@@ -1402,8 +1402,138 @@ theme_override_fonts/font = ExtResource("2_5x7mt")
 theme_override_font_sizes/font_size = 28
 text = "عودة للعبة"
 
+[node name="win screen" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="win screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.5
+offset_top = -158.5
+offset_right = 138.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 40
+text = "لقد ربحت اللعبة!"
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="win screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -31.0
+offset_right = 73.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="lose screen" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="lose screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -158.5
+offset_right = 109.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 40
+text = "لقد خسرت!"
+horizontal_alignment = 1
+
+[node name="answer" type="Label" parent="lose screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = 57.5
+offset_right = 109.5
+offset_bottom = 134.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 40
+text = "الإجابة: "
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="lose screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -31.0
+offset_right = 73.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_5x7mt")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="shader layers" type="Node" parent="."]
+
+[node name="pause layer" type="CanvasLayer" parent="shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="shader layers/pause layer"]
+material = SubResource("ShaderMaterial_7s155")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="win layer" type="CanvasLayer" parent="shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="shader layers/win layer"]
+material = SubResource("ShaderMaterial_vpdrk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="lose layer" type="CanvasLayer" parent="shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="shader layers/lose layer"]
+material = SubResource("ShaderMaterial_bimdd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="pressed" from="game/keyboard/check" to="." method="_on_check_pressed"]
 [connection signal="pressed" from="game/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="game/controls/pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="game/controls/mute" to="." method="_on_mute_pressed"]
 [connection signal="pressed" from="pause menu/unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="win screen/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="lose screen/replay" to="." method="_on_replay_pressed"]
