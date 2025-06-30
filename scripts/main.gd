@@ -1,5 +1,6 @@
 extends Control
 
+
 @onready var empty = preload("res://resources/empty_slot.png")
 @onready var misplaced = preload("res://resources/misplaced_slot.png")
 @onready var right = preload("res://resources/right_slot.png")
@@ -38,21 +39,24 @@ func _ready() -> void:
 	# This basically initializes the status of the 30 letters to be empty (the letters you click to choose from)
 	# and these letters have 4 states: (Yellow, Green, Dark Gray, Empty)
 	statusArray.fill("empty")
-	get_node("game/words/rows").get_child(row).get_child(col).get_node("Slot").texture = selected
+	get_slot(row, col).get_node("Slot").texture = selected
 	for i in range(30):
-		var key = get_node("game/keyboard/GridContainer/key_" + str(i))
+		var key = get_keyboard_key(i)
 		key.pressed.connect(_on_key_pressed.bind(key.text))  # This sets the buttons for listenting and binds the text as an argument
-		
+	
+	set_responsive_font_size()
+	print(answer)
+	
 func _on_key_pressed(letter : String) -> void:
 	if input_blocked:
 		return
-	var slot = get_node("game/words/rows").get_child(row).get_child(col)
+	var slot = get_slot(row, col)
 	slot.get_node("Label").text = letter
 	slot.get_node("Slot").texture = empty
 	guessedWordArray[col] = letter
 	if (col != WORD_LENGTH - 1):
 		col += 1
-	slot = get_node("game/words/rows").get_child(row).get_child(col)
+	slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 	# play click sound
 	if !muted: get_node("game/sfx/click").play()
@@ -79,7 +83,7 @@ func _on_check_pressed() -> void:
 		styleBox.texture_margin_right = 20
 
 		# the sprite of the letter slot (in the words grid)
-		var slotSprite = get_node("game/words/rows").get_child(row).get_child(i).get_node("Slot")
+		var slotSprite = get_slot(row, i).get_node("Slot")
 		var alphabetIndex : int = ALPHABET.find(guessedWordArray[i])  # index of the letter in Arabic Alphabet
 
 		var charIndexInAnswer : int = answerArray.find(guessedWordArray[i], 0)  # if letter found in word it stores its index in the answer word
@@ -100,7 +104,7 @@ func _on_check_pressed() -> void:
 			if !muted: get_node("game/sfx/wrong").play()
 
 		# The keyboard key node
-		var keyboardKey = get_node("game/keyboard/GridContainer").get_child(alphabetIndex)
+		var keyboardKey = get_keyboard_key(alphabetIndex)
 
 		keyboardKey.add_theme_stylebox_override("normal", styleBox)
 		keyboardKey.add_theme_stylebox_override("pressed", styleBox)
@@ -121,22 +125,24 @@ func _on_check_pressed() -> void:
 		get_node("lose screen").visible = true
 		get_node("shader layers/lose layer").visible = true
 		return
-	var slot = get_node("game/words/rows").get_child(row).get_child(col)
+	var slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 	input_blocked = false
 	guessedWordArray = ["", "", "", "", ""]
 
+
 func _on_erase_pressed() -> void:
 	if input_blocked:
 		return
-	var slot = get_node("game/words/rows").get_child(row).get_child(col)
+	var slot = get_slot(row, col)
 	slot.get_node("Label").text = ""
 	slot.get_node("Slot").texture = empty
 	guessedWordArray[col] = ""
 	if (col != 0):
 		col -= 1
-	slot = get_node("game/words/rows").get_child(row).get_child(col)
+	slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
+
 
 func setStatus(styleBox : StyleBoxTexture, index : int, status : String) -> void:
 	if status == "right":
@@ -148,6 +154,7 @@ func setStatus(styleBox : StyleBoxTexture, index : int, status : String) -> void
 
 	styleBox.texture = statusDict[statusArray[index]]
 
+
 func loadDictionary() -> Array:
 	var file = FileAccess.open('res://resources/arabic_dict.txt', FileAccess.READ)
 	var dict = Array()
@@ -158,10 +165,40 @@ func loadDictionary() -> Array:
 			dict.append(word)
 	return dict
 
+
 func randomWord(dict : Array) -> String:
 	var dictSize : int = dict.size()
 	var randomIndex : int = randi() % dictSize
 	return dict[randomIndex]
+
+
+func get_slot(slotRow, slotCol):
+	return get_node("game/WordsMarginContainer/words/GridContainer").get_child(slotCol + slotRow * 5)
+
+
+func get_slot_with_index(index):
+	return get_node("game/WordsMarginContainer/words/GridContainer").get_child(index)
+
+func get_keyboard_key(key_index):
+	return get_node("game/KeyboardMarginContainer/keyboard/key_" + str(key_index))
+
+
+func set_responsive_font_size():
+	var screenScale = get_viewport().size.y / 900.0
+	var theme_ui = preload("res://themes/theme_ui.tres")
+	theme_ui.default_font_size = clamp(int(40 * screenScale), 20, 40)
+	theme = theme_ui
+	var scaleSlot = Utils.map(screenScale, 0, 2, 0.5, 3)
+	var separation = Utils.map(screenScale, 0, 2, 50, 120)
+	seperateSlots(separation)
+	
+	for i in range(30):
+		get_slot_with_index(i).get_node("Slot").scale = Vector2(scaleSlot, scaleSlot)
+		
+		
+func seperateSlots(separation):
+	get_node("game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("h_separation", separation)
+	get_node("game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("v_separation", separation)
 
 
 func _on_mute_pressed() -> void:
@@ -179,15 +216,24 @@ func _on_mute_pressed() -> void:
 	get_node("game/controls/mute").add_theme_stylebox_override("hover", styleBox)
 
 
+	
+
 func _on_pause_pressed() -> void:
 	get_node("shader layers/pause layer").visible = true
 	get_node("pause menu").visible = true
 	paused = true
+
 
 func _on_unpause_pressed() -> void:
 	get_node("shader layers/pause layer").visible = false
 	get_node("pause menu").visible = false
 	paused = false
 
+
 func _on_replay_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		set_responsive_font_size()

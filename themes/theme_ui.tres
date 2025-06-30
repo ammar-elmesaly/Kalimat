@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cet12s7ldeodg"]
+
+[ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="1_8lnqq"]
+
+[resource]
+default_font = ExtResource("1_8lnqq")

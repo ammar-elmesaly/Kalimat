@@ -1,6 +1,6 @@
 [gd_scene load_steps=40 format=3 uid="uid://vsb4akym35c"]
 
-[ext_resource type="Script" uid="uid://h4a17okko0hk" path="res://scripts/main.gd" id="1_hkxhb"]
+[ext_resource type="Script" uid="uid://h4a17okko0hk" path="res://scripts/main.gd" id="1_muem4"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
 [ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="2_5x7mt"]
 [ext_resource type="Shader" uid="uid://boy75mx7e8ws7" path="res://shaders/pause.gdshader" id="2_s8h3y"]
@@ -105,7 +105,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hkxhb")
+script = ExtResource("1_muem4")
 metadata/_edit_vertical_guides_ = [1160.0, -2.0]
 
 [node name="game" type="Control" parent="."]
@@ -113,45 +113,41 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1112.0
-offset_bottom = -608.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="words" type="Control" parent="game"]
+[node name="WordsMarginContainer" type="MarginContainer" parent="game"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 521.5
-offset_top = 47.0
-offset_right = 590.5
-offset_bottom = 47.0
+anchors_preset = 10
+anchor_right = 1.0
 grow_horizontal = 2
+theme_override_constants/margin_top = 59
 
-[node name="rows" type="VBoxContainer" parent="game/words"]
+[node name="words" type="Control" parent="game/WordsMarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="game/WordsMarginContainer/words"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -137.5
-offset_right = 137.5
+offset_left = -120.0
+offset_right = 120.0
 offset_bottom = 300.0
 grow_horizontal = 2
-theme_override_constants/separation = 60
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 60
+columns = 5
 
-[node name="row_0" type="HBoxContainer" parent="game/words/rows"]
+[node name="slot_0" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 55
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="slot_0" type="Control" parent="game/words/rows/row_0"]
-layout_mode = 2
-
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_0/slot_0"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_0"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_0/slot_0"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_0"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -165,20 +161,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="game/words/rows/row_0"]
+[node name="slot_1" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_0/slot_1"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_1"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_0/slot_1"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -192,20 +188,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="game/words/rows/row_0"]
+[node name="slot_2" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_0/slot_2"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_2"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_0/slot_2"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_2"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -219,20 +215,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="game/words/rows/row_0"]
+[node name="slot_3" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_0/slot_3"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_3"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_0/slot_3"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_3"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -246,20 +242,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="game/words/rows/row_0"]
+[node name="slot_4" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_0/slot_4"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_4"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_0/slot_4"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_4"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -273,25 +269,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="row_1" type="HBoxContainer" parent="game/words/rows"]
+[node name="slot_5" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 55
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="slot_0" type="Control" parent="game/words/rows/row_1"]
-layout_mode = 2
-
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_1/slot_0"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_5"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_1/slot_0"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_5"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -305,20 +296,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="game/words/rows/row_1"]
+[node name="slot_6" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_1/slot_1"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_6"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_1/slot_1"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_6"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -332,20 +323,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="game/words/rows/row_1"]
+[node name="slot_7" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_1/slot_2"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_7"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_1/slot_2"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_7"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -359,20 +350,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="game/words/rows/row_1"]
+[node name="slot_8" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_1/slot_3"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_8"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_1/slot_3"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_8"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -386,20 +377,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="game/words/rows/row_1"]
+[node name="slot_9" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_1/slot_4"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_9"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_1/slot_4"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_9"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -413,25 +404,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="row_2" type="HBoxContainer" parent="game/words/rows"]
+[node name="slot_10" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 55
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="slot_0" type="Control" parent="game/words/rows/row_2"]
-layout_mode = 2
-
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_2/slot_0"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_10"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_2/slot_0"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_10"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -445,20 +431,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="game/words/rows/row_2"]
+[node name="slot_11" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_2/slot_1"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_11"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_2/slot_1"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_11"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -472,20 +458,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="game/words/rows/row_2"]
+[node name="slot_12" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_2/slot_2"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_12"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_2/slot_2"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_12"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -499,20 +485,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="game/words/rows/row_2"]
+[node name="slot_13" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_2/slot_3"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_13"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_2/slot_3"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_13"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -526,20 +512,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="game/words/rows/row_2"]
+[node name="slot_14" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_2/slot_4"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_14"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_2/slot_4"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_14"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -553,25 +539,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="row_3" type="HBoxContainer" parent="game/words/rows"]
+[node name="slot_15" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 55
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="slot_0" type="Control" parent="game/words/rows/row_3"]
-layout_mode = 2
-
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_3/slot_0"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_15"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_3/slot_0"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_15"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -585,20 +566,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="game/words/rows/row_3"]
+[node name="slot_16" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_3/slot_1"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_16"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_3/slot_1"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_16"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -612,20 +593,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="game/words/rows/row_3"]
+[node name="slot_17" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_3/slot_2"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_17"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_3/slot_2"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_17"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -639,20 +620,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="game/words/rows/row_3"]
+[node name="slot_18" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_3/slot_3"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_18"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_3/slot_3"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_18"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -666,20 +647,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="game/words/rows/row_3"]
+[node name="slot_19" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_3/slot_4"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_19"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_3/slot_4"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_19"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -693,25 +674,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="row_4" type="HBoxContainer" parent="game/words/rows"]
+[node name="slot_20" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 55
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="slot_0" type="Control" parent="game/words/rows/row_4"]
-layout_mode = 2
-
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_4/slot_0"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_20"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_4/slot_0"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_20"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -725,20 +701,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="game/words/rows/row_4"]
+[node name="slot_21" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_4/slot_1"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_21"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_4/slot_1"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_21"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -752,20 +728,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="game/words/rows/row_4"]
+[node name="slot_22" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_4/slot_2"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_22"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_4/slot_2"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_22"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -779,20 +755,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="game/words/rows/row_4"]
+[node name="slot_23" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_4/slot_3"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_23"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_4/slot_3"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_23"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -806,20 +782,19 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="game/words/rows/row_4"]
+[node name="slot_24" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_4/slot_4"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_24"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_4/slot_4"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_24"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -833,25 +808,19 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="row_5" type="HBoxContainer" parent="game/words/rows"]
+[node name="slot_25" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 55
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="slot_0" type="Control" parent="game/words/rows/row_5"]
-layout_mode = 2
-
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_5/slot_0"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_25"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_5/slot_0"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_25"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -865,20 +834,19 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="slot_1" type="Control" parent="game/words/rows/row_5"]
+[node name="slot_26" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_5/slot_1"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_26"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_5/slot_1"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_26"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -892,20 +860,19 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="slot_2" type="Control" parent="game/words/rows/row_5"]
+[node name="slot_27" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_5/slot_2"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_27"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_5/slot_2"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_27"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -919,20 +886,19 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
-metadata/_edit_use_anchors_ = true
 
-[node name="slot_3" type="Control" parent="game/words/rows/row_5"]
+[node name="slot_28" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_5/slot_3"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_28"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_5/slot_3"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_28"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -946,20 +912,20 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="slot_4" type="Control" parent="game/words/rows/row_5"]
+[node name="slot_29" type="Control" parent="game/WordsMarginContainer/words/GridContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Slot" type="Sprite2D" parent="game/words/rows/row_5/slot_4"]
+[node name="Slot" type="Sprite2D" parent="game/WordsMarginContainer/words/GridContainer/slot_29"]
 texture = ExtResource("1_xslwc")
 
-[node name="Label" type="Label" parent="game/words/rows/row_5/slot_4"]
+[node name="Label" type="Label" parent="game/WordsMarginContainer/words/GridContainer/slot_29"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -973,333 +939,318 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
 horizontal_alignment = 1
 vertical_alignment = 1
 justification_flags = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="keyboard" type="Control" parent="game"]
+[node name="KeyboardMarginContainer" type="MarginContainer" parent="game"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 556.0
-offset_top = 584.0
-offset_right = 556.0
-offset_bottom = 584.0
+offset_top = -18.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/margin_left = 342
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 342
+theme_override_constants/margin_bottom = 90
 
-[node name="GridContainer" type="GridContainer" parent="game/keyboard"]
+[node name="keyboard" type="GridContainer" parent="game/KeyboardMarginContainer"]
 layout_direction = 3
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -277.0
-offset_top = -226.0
-offset_right = 277.0
-grow_horizontal = 2
-grow_vertical = 0
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 10
 columns = 8
 
-[node name="key_0" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_0" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ا"
 
-[node name="key_1" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_1" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ب"
 
-[node name="key_2" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_2" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ت"
 
-[node name="key_3" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_3" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ث"
 
-[node name="key_4" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_4" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ج"
 
-[node name="key_5" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_5" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ح"
 
-[node name="key_6" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_6" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "خ"
 
-[node name="key_7" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_7" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "د"
 
-[node name="key_8" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_8" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ذ"
 
-[node name="key_9" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_9" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ر"
 
-[node name="key_10" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_10" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ز"
 
-[node name="key_11" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_11" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "س"
 
-[node name="key_12" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_12" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ش"
 
-[node name="key_13" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_13" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ص"
 
-[node name="key_14" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_14" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ض"
 
-[node name="key_15" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_15" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ط"
 
-[node name="key_16" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_16" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ظ"
 
-[node name="key_17" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_17" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ع"
 
-[node name="key_18" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_18" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "غ"
 
-[node name="key_19" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_19" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ف"
 
-[node name="key_20" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_20" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ق"
 
-[node name="key_21" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_21" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ك"
 
-[node name="key_22" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_22" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ل"
 
-[node name="key_23" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_23" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "م"
 
-[node name="key_24" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_24" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ن"
 
-[node name="key_25" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_25" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ه"
 
-[node name="key_26" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_26" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "و"
 
-[node name="key_27" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_27" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ي"
 
-[node name="key_28" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_28" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ة"
 
-[node name="key_29" type="Button" parent="game/keyboard/GridContainer"]
+[node name="key_29" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
 theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
 text = "ء"
 
-[node name="check" type="Button" parent="game/keyboard"]
-layout_mode = 0
-offset_left = 167.5
-offset_top = -49.0
-offset_right = 250.5
-theme_override_fonts/font = ExtResource("2_5x7mt")
-theme_override_font_sizes/font_size = 25
+[node name="check" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/focus = SubResource("StyleBoxEmpty_n7ocb")
 theme_override_styles/hover = SubResource("StyleBoxTexture_1ugrw")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_tyr4w")
 theme_override_styles/normal = SubResource("StyleBoxTexture_46qjj")
 text = "جرِّب"
 
-[node name="erase" type="Button" parent="game/keyboard"]
+[node name="erase" type="Button" parent="game/KeyboardMarginContainer/keyboard"]
+custom_minimum_size = Vector2(52, 50)
 layout_mode = 2
-offset_left = 259.5
-offset_top = -49.0
-offset_right = 323.5
-offset_bottom = 2.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/focus = SubResource("StyleBoxEmpty_jndie")
 theme_override_styles/hover = SubResource("StyleBoxTexture_e6fp8")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_tng7k")
@@ -1342,10 +1293,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -1112.0
-offset_top = 277.0
-offset_right = -1040.0
-offset_bottom = 397.0
+offset_top = -60.0
+offset_right = 72.0
+offset_bottom = 60.0
 grow_vertical = 2
 theme_override_constants/separation = 20
 
@@ -1530,8 +1480,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="pressed" from="game/keyboard/check" to="." method="_on_check_pressed"]
-[connection signal="pressed" from="game/keyboard/erase" to="." method="_on_erase_pressed"]
+[connection signal="pressed" from="game/KeyboardMarginContainer/keyboard/check" to="." method="_on_check_pressed"]
+[connection signal="pressed" from="game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="game/controls/pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="game/controls/mute" to="." method="_on_mute_pressed"]
 [connection signal="pressed" from="pause menu/unpause" to="." method="_on_unpause_pressed"]
