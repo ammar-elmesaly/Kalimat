@@ -188,8 +188,11 @@ func set_responsive_size():
 	theme_ui.default_font_size = clamp(int(40 * screenScale), 25, 40)
 	theme = theme_ui
 	var scaleSlot = Utils.map(screenScale, 0, 2, 1, 2.2)
-	var separation = Utils.map(screenScale, 0, 2, 50, 120)
-	seperateSlots(separation)  # Seperates letters slots (the slots you enter letters in)
+	var slotSeparation = Utils.map(screenScale, 0, 2, 50, 120)
+	var gameContainerSeparation = Utils.map(screenScale, 0.6, 2, 420, 540)
+	
+	separateSlots(slotSeparation)  # Separates letters slots (the slots you enter letters in)
+	separateGameContainers(gameContainerSeparation)  # Separates game containers (slots container and keyboard container)
 	
 	if (get_viewport().size.x <= 790):
 		get_node("GameContainer/game/KeyboardMarginContainer/keyboard").columns = 6
@@ -200,10 +203,13 @@ func set_responsive_size():
 		get_slot_with_index(i).get_node("Slot").scale = Vector2(scaleSlot, scaleSlot)  # Applies scales to each slot
 		
 		
-func seperateSlots(separation):
+func separateSlots(separation):
 	get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("h_separation", separation)
 	get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("v_separation", separation)
 
+
+func separateGameContainers(separation):
+	get_node("GameContainer/game").add_theme_constant_override("separation", separation)
 
 func _on_mute_pressed() -> void:
 	var styleBox = StyleBoxTexture.new()
