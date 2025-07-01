@@ -44,8 +44,7 @@ func _ready() -> void:
 		var key = get_keyboard_key(i)
 		key.pressed.connect(_on_key_pressed.bind(key.text))  # This sets the buttons for listenting and binds the text as an argument
 	
-	set_responsive_font_size()
-	print(answer)
+	set_responsive_size()
 	
 func _on_key_pressed(letter : String) -> void:
 	if input_blocked:
@@ -59,7 +58,7 @@ func _on_key_pressed(letter : String) -> void:
 	slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 	# play click sound
-	if !muted: get_node("game/sfx/click").play()
+	if !muted: get_node("sfx/click").play()
 
 func _on_check_pressed() -> void:
 	if input_blocked:
@@ -91,17 +90,17 @@ func _on_check_pressed() -> void:
 		if guessedWordArray.slice(i).count(guessedWordArray[i]) > answerArray.count(guessedWordArray[i]) and i != charIndexInAnswer:
 			slotSprite.texture = wrong
 			setStatus(styleBox, alphabetIndex, "wrong")
-			if !muted: get_node("game/sfx/wrong").play()
+			if !muted: get_node("sfx/wrong").play()
 
 		elif i == charIndexInAnswer:
 				slotSprite.texture = right
 				setStatus(styleBox, alphabetIndex, "right")
 				answerArray[i] = ""
-				if !muted: get_node("game/sfx/right").play()
+				if !muted: get_node("sfx/right").play()
 		else:
 			slotSprite.texture = misplaced
 			setStatus(styleBox, alphabetIndex, "misplaced")
-			if !muted: get_node("game/sfx/wrong").play()
+			if !muted: get_node("sfx/wrong").play()
 
 		# The keyboard key node
 		var keyboardKey = get_keyboard_key(alphabetIndex)
@@ -114,16 +113,16 @@ func _on_check_pressed() -> void:
 			await get_tree().process_frame
 
 	if ("".join(guessedWordArray) == answer):
-		get_node("win screen").visible = true
-		get_node("shader layers/win layer").visible = true
-		if !muted: get_node("game/sfx/win").play()
+		get_node("graphics/win screen").visible = true
+		get_node("graphics/shader layers/win layer").visible = true
+		if !muted: get_node("sfx/win").play()
 		return
 	col = 0
 	row += 1
 	if row > 5:
-		get_node("lose screen/answer").text += answer
-		get_node("lose screen").visible = true
-		get_node("shader layers/lose layer").visible = true
+		get_node("graphics/lose screen/answer").text += answer
+		get_node("graphics/lose screen").visible = true
+		get_node("graphics/shader layers/lose layer").visible = true
 		return
 	var slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
@@ -173,32 +172,37 @@ func randomWord(dict : Array) -> String:
 
 
 func get_slot(slotRow, slotCol):
-	return get_node("game/WordsMarginContainer/words/GridContainer").get_child(slotCol + slotRow * 5)
+	return get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").get_child(slotCol + slotRow * 5)
 
 
 func get_slot_with_index(index):
-	return get_node("game/WordsMarginContainer/words/GridContainer").get_child(index)
+	return get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").get_child(index)
 
 func get_keyboard_key(key_index):
-	return get_node("game/KeyboardMarginContainer/keyboard/key_" + str(key_index))
+	return get_node("GameContainer/game/KeyboardMarginContainer/keyboard/key_" + str(key_index))
 
 
-func set_responsive_font_size():
+func set_responsive_size():
 	var screenScale = get_viewport().size.y / 900.0
-	var theme_ui = preload("res://themes/theme_ui.tres")
-	theme_ui.default_font_size = clamp(int(40 * screenScale), 20, 40)
+	var theme_ui = preload("res://themes/theme_ui.tres")  # This theme basically contains font size
+	theme_ui.default_font_size = clamp(int(40 * screenScale), 25, 40)
 	theme = theme_ui
-	var scaleSlot = Utils.map(screenScale, 0, 2, 0.5, 3)
+	var scaleSlot = Utils.map(screenScale, 0, 2, 1, 2.2)
 	var separation = Utils.map(screenScale, 0, 2, 50, 120)
-	seperateSlots(separation)
+	seperateSlots(separation)  # Seperates letters slots (the slots you enter letters in)
+	
+	if (get_viewport().size.x <= 790):
+		get_node("GameContainer/game/KeyboardMarginContainer/keyboard").columns = 6
+	else:
+		get_node("GameContainer/game/KeyboardMarginContainer/keyboard").columns = 8
 	
 	for i in range(30):
-		get_slot_with_index(i).get_node("Slot").scale = Vector2(scaleSlot, scaleSlot)
+		get_slot_with_index(i).get_node("Slot").scale = Vector2(scaleSlot, scaleSlot)  # Applies scales to each slot
 		
 		
 func seperateSlots(separation):
-	get_node("game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("h_separation", separation)
-	get_node("game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("v_separation", separation)
+	get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("h_separation", separation)
+	get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("v_separation", separation)
 
 
 func _on_mute_pressed() -> void:
@@ -211,22 +215,22 @@ func _on_mute_pressed() -> void:
 		styleBox.texture = volumeUp
 		muted = false
 
-	get_node("game/controls/mute").add_theme_stylebox_override("normal", styleBox)
-	get_node("game/controls/mute").add_theme_stylebox_override("pressed", styleBox)
-	get_node("game/controls/mute").add_theme_stylebox_override("hover", styleBox)
+	get_node("ControlsContainer/controls/mute").add_theme_stylebox_override("normal", styleBox)
+	get_node("ControlsContainer/controls/mute").add_theme_stylebox_override("pressed", styleBox)
+	get_node("ControlsContainer/controls/mute").add_theme_stylebox_override("hover", styleBox)
 
 
 	
 
 func _on_pause_pressed() -> void:
-	get_node("shader layers/pause layer").visible = true
-	get_node("pause menu").visible = true
+	get_node("graphics/shader layers/pause layer").visible = true
+	get_node("graphics/pause menu").visible = true
 	paused = true
 
 
 func _on_unpause_pressed() -> void:
-	get_node("shader layers/pause layer").visible = false
-	get_node("pause menu").visible = false
+	get_node("graphics/shader layers/pause layer").visible = false
+	get_node("graphics/pause menu").visible = false
 	paused = false
 
 
@@ -236,4 +240,4 @@ func _on_replay_pressed() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
-		set_responsive_font_size()
+		set_responsive_size()
