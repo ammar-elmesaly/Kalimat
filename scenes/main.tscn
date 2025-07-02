@@ -123,7 +123,7 @@ motion_mirroring = Vector2(400, 400)
 
 [node name="TextureRect" type="TextureRect" parent="graphics/ParallaxBackground/ParallaxLayer"]
 offset_left = -2405.0
-offset_bottom = 1153.0
+offset_bottom = 2405.0
 texture = ExtResource("2_uumms")
 stretch_mode = 1
 
@@ -320,13 +320,12 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
-theme_override_constants/separation = 445
+theme_override_constants/separation = 365
 
 [node name="WordsMarginContainer" type="MarginContainer" parent="GameContainer/game"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme_override_constants/margin_top = 59
 
 [node name="words" type="Control" parent="GameContainer/game/WordsMarginContainer"]
 layout_mode = 2
@@ -1464,7 +1463,7 @@ offset_left = -80.0
 offset_bottom = 150.0
 grow_horizontal = 0
 theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
+theme_override_constants/margin_top = 66
 
 [node name="controls" type="VBoxContainer" parent="ControlsContainer"]
 layout_direction = 2

@@ -155,7 +155,7 @@ func setStatus(styleBox : StyleBoxTexture, index : int, status : String) -> void
 
 
 func loadDictionary() -> Array:
-	var file = FileAccess.open('res://resources/arabic_dict.txt', FileAccess.READ)
+	var file = FileAccess.open('res://resources/dicts/arabic_dict.txt', FileAccess.READ)
 	var dict = Array()
 	
 	if file:
@@ -189,10 +189,9 @@ func set_responsive_size():
 	theme = theme_ui
 	var scaleSlot = Utils.map(screenScale, 0, 2, 1, 2.2)
 	var slotSeparation = Utils.map(screenScale, 0, 2, 50, 120)
-	var gameContainerSeparation = Utils.map(screenScale, 0.6, 2, 420, 540)
-	
 	separateSlots(slotSeparation)  # Separates letters slots (the slots you enter letters in)
-	separateGameContainers(gameContainerSeparation)  # Separates game containers (slots container and keyboard container)
+	separateGameContainers(get_viewport().size.y)
+	setTopGameMargin(get_viewport().size.y)
 	
 	if (get_viewport().size.x <= 790):
 		get_node("GameContainer/game/KeyboardMarginContainer/keyboard").columns = 6
@@ -203,14 +202,22 @@ func set_responsive_size():
 		get_slot_with_index(i).get_node("Slot").scale = Vector2(scaleSlot, scaleSlot)  # Applies scales to each slot
 		
 		
-func separateSlots(separation):
+func separateSlots(separation : int):
 	get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("h_separation", separation)
 	get_node("GameContainer/game/WordsMarginContainer/words/GridContainer").add_theme_constant_override("v_separation", separation)
 
 
-func separateGameContainers(separation):
+func separateGameContainers(height : int):
+	var separation = int(0.234 * height + 248)  # Linear equation for separation
 	get_node("GameContainer/game").add_theme_constant_override("separation", separation)
 
+
+func setTopGameMargin(height : int):
+	const MARGIN_MIN = 100
+	var margin = int(0.24 * height - 130)
+	margin = MARGIN_MIN if margin < MARGIN_MIN else margin  # Ensures margin is not less than 100
+	get_node("GameContainer/game/WordsMarginContainer").add_theme_constant_override("margin_top", margin)
+	
 func _on_mute_pressed() -> void:
 	var styleBox = StyleBoxTexture.new()
 

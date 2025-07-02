@@ -22,8 +22,8 @@ Utils="*res://scripts/utils.gd"
 [display]
 
 window/size/viewport_width=1080
-window/size/mode=3
-window/handheld/orientation=1
+window/stretch/mode="viewport"
+window/handheld/orientation=6
 
 [input_devices]
 
