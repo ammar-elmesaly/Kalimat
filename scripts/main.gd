@@ -89,18 +89,25 @@ func _on_check_pressed() -> void:
 	
 	var rightCount : int = 0
 	for i in range(WORD_LENGTH):
-		if i == randomHintChar.index: continue  # continues on revealed
-		await get_tree().create_timer(0.5).timeout  # time delay between each iteration
 		# Set a new style box for each letter in the keyboard instead of them sharing the same
 		# Stylebox
 		var styleBox = StyleBoxTexture.new()
 		styleBox.texture_margin_left = 20  # set texture margin for new style box
 		styleBox.texture_margin_right = 20
-
+		
 		# the sprite of the letter slot (in the words grid)
 		var slotSprite = get_slot(row, i).get_node("Slot")
 		var alphabetIndex : int = getIndexInArabicAlphabet(guessedWordArray[i])  # index of the letter in Arabic Alphabet
 		var charIndexInAnswer : int = answerArray.find(guessedWordArray[i], 0)  # if letter found in word it stores its index in the answer word
+		
+		if i == randomHintChar.index:  # if current iteration is revealed, skips
+			rightCount += 1
+			setStatus(styleBox, alphabetIndex, "right")
+			answerArray[i] = ""
+			continue  # continues on revealed
+		
+		await get_tree().create_timer(0.5).timeout  # time delay between each iteration
+		
 		# this condition is the core logic of the game
 		if guessedWordArray.slice(i).count(guessedWordArray[i]) > answerArray.count(guessedWordArray[i]) and i != charIndexInAnswer:
 			slotSprite.texture = wrong
@@ -165,7 +172,7 @@ func _on_erase_pressed() -> void:
 
 
 func jumpCol(backwards = false):
-	if col == randomHintChar.index:   # if the current slot is the guessed char, jump one column
+	if col == randomHintChar.index:   # if the current slot is the hint char, jump one column
 		if (backwards):
 			if col == 0: col += 1
 			else: col -= 1
@@ -330,7 +337,7 @@ func _on_hint_pressed() -> void:
 	keyboardKey.add_theme_stylebox_override("pressed", styleBox)
 	keyboardKey.add_theme_stylebox_override("hover", styleBox)
 	if !muted: get_node("sfx/hint").play()
-	jumpCol()  # jumps one column if the selected slot is equal to the guessed letter slot
+	jumpCol()  # jumps one column if the selected slot is equal to the hint letter slot
 	
 
 func _notification(what: int) -> void:
