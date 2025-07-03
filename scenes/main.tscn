@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=49 format=3 uid="uid://vsb4akym35c"]
 
 [ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_muem4"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://oniqmd3dpc4r" path="res://resources/volume-up.svg" id="14_pjfkq"]
 [ext_resource type="Shader" uid="uid://bnmcq5av2qv54" path="res://shaders/win.gdshader" id="16_5aa60"]
 [ext_resource type="Shader" uid="uid://b6r7wyfl3k8pa" path="res://shaders/lose.gdshader" id="17_t54y0"]
+[ext_resource type="Texture2D" uid="uid://bilnfax0g7vj8" path="res://resources/guess_used.png" id="19_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://ct6onos13ug3h" path="res://resources/guess_available.png" id="20_yc10j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7s155"]
 shader = ExtResource("2_s8h3y")
@@ -97,6 +99,39 @@ texture = ExtResource("14_pjfkq")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yytae"]
 texture = ExtResource("14_pjfkq")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqmmt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jscy8"]
+texture = ExtResource("19_gqmmt")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqmmt"]
+texture = ExtResource("20_yc10j")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yc10j"]
+texture = ExtResource("20_yc10j")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y6deb"]
+texture = ExtResource("20_yc10j")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pm3ni"]
+texture = ExtResource("20_yc10j")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
 
 [node name="main" type="Control"]
 layout_direction = 3
@@ -1488,6 +1523,23 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_xk3vp")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_l1cdg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
 
+[node name="GuessContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 66
+theme_override_constants/margin_right = 30
+
+[node name="Guess" type="Button" parent="GuessContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gqmmt")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_jscy8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gqmmt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yc10j")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y6deb")
+theme_override_styles/normal = SubResource("StyleBoxTexture_pm3ni")
+text = "💡"
+
 [connection signal="pressed" from="graphics/pause menu/unpause" to="." method="_on_unpause_pressed"]
 [connection signal="pressed" from="graphics/win screen/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="graphics/lose screen/replay" to="." method="_on_replay_pressed"]
@@ -1495,3 +1547,4 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/mute" to="." method="_on_mute_pressed"]
+[connection signal="pressed" from="GuessContainer/Guess" to="." method="_on_guess_pressed"]

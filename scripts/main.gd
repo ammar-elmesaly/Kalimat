@@ -17,7 +17,16 @@ extends Control
 	"wrong" : wrong
 }
 
+class RandomGuessedChar:
+	var letter
+	var index
+	
+	func _init(_letter, _index) -> void:
+		letter = _letter
+		index = _index
+
 const WORD_LENGTH : int = 5
+const ATTEMPT_COUNT : int = 6
 const ALPHABET_LETTER_NUMBER : int = 30
 
 var row : int = 0
@@ -31,6 +40,8 @@ var muted : bool = false
 var paused : bool = false
 
 var dictionaryArray = Array()
+
+var randomGuessedChar : RandomGuessedChar = RandomGuessedChar.new(null, null)
 
 func _ready() -> void:
 	dictionaryArray = loadDictionary()
@@ -55,6 +66,7 @@ func _on_key_pressed(letter : String) -> void:
 	guessedWordArray[col] = letter
 	if (col != WORD_LENGTH - 1):
 		col += 1
+		jumpCol()
 	slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 	# play click sound
@@ -64,15 +76,17 @@ func _on_check_pressed() -> void:
 	if input_blocked:
 		return
 	input_blocked = true
-	const ALPHABET : String = "ابتثجحخدذرزسشصضطظعغفقكلمنهويةء"
 	var answerArray = answer.split("")
+	if (randomGuessedChar.index and randomGuessedChar.letter):  # Ensures that user actually guessed
+		guessedWordArray[randomGuessedChar.index] = randomGuessedChar.letter  # if user guessed a letter, then the guess is stored
 	var guessedWord : String = ''.join(guessedWordArray)
 	# if a new dictionary is found, add this condition to the if-condition below:
 	# or !dictionaryArray.has(guessedWord)
 	if len(guessedWord) != 5:
 		input_blocked = false
 		return
-
+	
+	var rightCount : int = 0
 	for i in range(WORD_LENGTH):
 		await get_tree().create_timer(0.5).timeout  # time delay between each iteration
 		# Set a new style box for each letter in the keyboard instead of them sharing the same
@@ -83,8 +97,7 @@ func _on_check_pressed() -> void:
 
 		# the sprite of the letter slot (in the words grid)
 		var slotSprite = get_slot(row, i).get_node("Slot")
-		var alphabetIndex : int = ALPHABET.find(guessedWordArray[i])  # index of the letter in Arabic Alphabet
-
+		var alphabetIndex : int = getIndexInArabicAlphabet(guessedWordArray[i])  # index of the letter in Arabic Alphabet
 		var charIndexInAnswer : int = answerArray.find(guessedWordArray[i], 0)  # if letter found in word it stores its index in the answer word
 		# this condition is the core logic of the game
 		if guessedWordArray.slice(i).count(guessedWordArray[i]) > answerArray.count(guessedWordArray[i]) and i != charIndexInAnswer:
@@ -94,6 +107,7 @@ func _on_check_pressed() -> void:
 
 		elif i == charIndexInAnswer:
 				slotSprite.texture = right
+				rightCount += 1
 				setStatus(styleBox, alphabetIndex, "right")
 				answerArray[i] = ""
 				if !muted: get_node("sfx/right").play()
@@ -128,6 +142,9 @@ func _on_check_pressed() -> void:
 	slot.get_node("Slot").texture = selected
 	input_blocked = false
 	guessedWordArray = ["", "", "", "", ""]
+	
+	if rightCount == WORD_LENGTH - 1:
+		get_node("GuessContainer/Guess").disabled = true
 
 
 func _on_erase_pressed() -> void:
@@ -139,10 +156,30 @@ func _on_erase_pressed() -> void:
 	guessedWordArray[col] = ""
 	if (col != 0):
 		col -= 1
+		jumpCol(true)
 	slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 
 
+func jumpCol(backwards = false):
+	if col == randomGuessedChar.index:   # if the current slot is the guessed char, jump one column
+		if (backwards):
+			if col == 0: col += 1
+			else: col -= 1
+			get_slot(row, col).get_node("Slot").texture = selected
+		else:
+			if col == WORD_LENGTH - 1: col -= 1
+			else: col += 1
+			get_slot(row, col).get_node("Slot").texture = selected
+	
+	
+func getIndexInArabicAlphabet(letter) -> int:
+	
+	const ALPHABET : String = "ابتثجحخدذرزسشصضطظعغفقكلمنهويةء"
+	var alphabetIndex : int = ALPHABET.find(letter)  # index of the letter in Arabic Alphabet
+	return alphabetIndex
+	
+	
 func setStatus(styleBox : StyleBoxTexture, index : int, status : String) -> void:
 	if status == "right":
 		statusArray[index] = "right"
@@ -217,7 +254,15 @@ func setTopGameMargin(height : int):
 	var margin = int(0.24 * height - 130)
 	margin = MARGIN_MIN if margin < MARGIN_MIN else margin  # Ensures margin is not less than 100
 	get_node("GameContainer/game/WordsMarginContainer").add_theme_constant_override("margin_top", margin)
-	
+
+
+func isLetterAlreadySolved(letterIndex) -> bool:  # is letter already solved by user
+	for i in range(ATTEMPT_COUNT):
+		for j in range(WORD_LENGTH):
+			if (get_slot(i, j).get_node("Slot").texture == right and j == letterIndex):
+				return true
+	return false
+
 func _on_mute_pressed() -> void:
 	var styleBox = StyleBoxTexture.new()
 
@@ -250,6 +295,41 @@ func _on_unpause_pressed() -> void:
 func _on_replay_pressed() -> void:
 	get_tree().reload_current_scene()
 
+func _on_guess_pressed() -> void:
+	if input_blocked:
+		return
+		
+	get_node("GuessContainer/Guess").disabled = true
+	
+	var styleBox = StyleBoxTexture.new()
+	styleBox.texture_margin_left = 20  # set texture margin for new style box
+	styleBox.texture_margin_right = 20
+	
+	var randomLetterIndex : int = randi() % WORD_LENGTH
+	var guessedRandomLetter = answer[randomLetterIndex]
+	print(guessedRandomLetter)
+	while (isLetterAlreadySolved(randomLetterIndex)):
+		randomLetterIndex = randi() % WORD_LENGTH
+		guessedRandomLetter = answer[randomLetterIndex]
+		print(guessedRandomLetter)
+	
+	var alphabetIndex = getIndexInArabicAlphabet(guessedRandomLetter)
+	randomGuessedChar.letter = guessedRandomLetter
+	randomGuessedChar.index = randomLetterIndex
+	
+	for i in range(row, 6):
+		var slot = get_slot(i, randomLetterIndex)
+		slot.get_node("Label").text = guessedRandomLetter
+		slot.get_node("Slot").texture = right
+	
+	setStatus(styleBox, alphabetIndex, "right")
+	
+	var keyboardKey = get_keyboard_key(alphabetIndex)
+	keyboardKey.add_theme_stylebox_override("normal", styleBox)
+	keyboardKey.add_theme_stylebox_override("pressed", styleBox)
+	keyboardKey.add_theme_stylebox_override("hover", styleBox)
+	jumpCol()
+	
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
