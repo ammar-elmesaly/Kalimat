@@ -1,6 +1,15 @@
 extends Control
 
 
+
+class RandomHintChar:
+	var letter
+	var index
+	
+	func _init(_letter, _index) -> void:
+		letter = _letter
+		index = _index
+
 @onready var empty = preload("res://resources/empty_slot.png")
 @onready var misplaced = preload("res://resources/misplaced_slot.png")
 @onready var right = preload("res://resources/right_slot.png")
@@ -16,14 +25,6 @@ extends Control
 	"right" : right,
 	"wrong" : wrong
 }
-
-class RandomGuessedChar:
-	var letter
-	var index
-	
-	func _init(_letter, _index) -> void:
-		letter = _letter
-		index = _index
 
 const WORD_LENGTH : int = 5
 const ATTEMPT_COUNT : int = 6
@@ -41,7 +42,7 @@ var paused : bool = false
 
 var dictionaryArray = Array()
 
-var randomGuessedChar : RandomGuessedChar = RandomGuessedChar.new(null, null)
+var randomHintChar : RandomHintChar = RandomHintChar.new(null, null)
 
 func _ready() -> void:
 	dictionaryArray = loadDictionary()
@@ -77,8 +78,8 @@ func _on_check_pressed() -> void:
 		return
 	input_blocked = true
 	var answerArray = answer.split("")
-	if (randomGuessedChar.index != null and randomGuessedChar.letter):  # Ensures that user actually guessed
-		guessedWordArray[randomGuessedChar.index] = randomGuessedChar.letter  # if user guessed a letter, then the guess is stored
+	if (randomHintChar.index != null and randomHintChar.letter):  # Ensures that user actually used hint
+		guessedWordArray[randomHintChar.index] = randomHintChar.letter  # if user used hint, then the hint is stored
 	var guessedWord : String = ''.join(guessedWordArray)
 	# if a new dictionary is found, add this condition to the if-condition below:
 	# or !dictionaryArray.has(guessedWord)
@@ -88,6 +89,7 @@ func _on_check_pressed() -> void:
 	
 	var rightCount : int = 0
 	for i in range(WORD_LENGTH):
+		if i == randomHintChar.index: continue  # continues on revealed
 		await get_tree().create_timer(0.5).timeout  # time delay between each iteration
 		# Set a new style box for each letter in the keyboard instead of them sharing the same
 		# Stylebox
@@ -145,7 +147,7 @@ func _on_check_pressed() -> void:
 	guessedWordArray = ["", "", "", "", ""]
 	
 	if rightCount == WORD_LENGTH - 1:
-		get_node("GuessContainer/Guess").disabled = true
+		get_node("HintContainer/Hint").disabled = true
 
 
 func _on_erase_pressed() -> void:
@@ -163,7 +165,7 @@ func _on_erase_pressed() -> void:
 
 
 func jumpCol(backwards = false):
-	if col == randomGuessedChar.index:   # if the current slot is the guessed char, jump one column
+	if col == randomHintChar.index:   # if the current slot is the guessed char, jump one column
 		if (backwards):
 			if col == 0: col += 1
 			else: col -= 1
@@ -261,7 +263,7 @@ func isLetterAlreadySolved(letterIndex) -> bool:  # is letter already solved by 
 	for i in range(ATTEMPT_COUNT):
 		for j in range(WORD_LENGTH):
 			if (get_slot(i, j).get_node("Slot").texture == right and j == letterIndex):  # if at any row, the slot is green and the index of that slot is the same as
-				return true																 # letter index, then it is already solved, so find another guess
+				return true																 # letter index, then it is already solved, so find another hint
 	return false
 
 func _on_mute_pressed() -> void:
@@ -296,29 +298,29 @@ func _on_unpause_pressed() -> void:
 func _on_replay_pressed() -> void:
 	get_tree().reload_current_scene()
 
-func _on_guess_pressed() -> void:
+func _on_hint_pressed() -> void:
 	if input_blocked:
 		return
 		
-	get_node("GuessContainer/Guess").disabled = true
+	get_node("HintContainer/Hint").disabled = true
 	
 	var styleBox = StyleBoxTexture.new()
 	styleBox.texture_margin_left = 20  # set texture margin for new style box
 	styleBox.texture_margin_right = 20
 	
 	var randomLetterIndex : int = randi() % WORD_LENGTH
-	var guessedRandomLetter = answer[randomLetterIndex]
+	var hintRandomLetter = answer[randomLetterIndex]
 	while (isLetterAlreadySolved(randomLetterIndex)):
 		randomLetterIndex = randi() % WORD_LENGTH
-		guessedRandomLetter = answer[randomLetterIndex]
+		hintRandomLetter = answer[randomLetterIndex]
 	
-	var alphabetIndex = getIndexInArabicAlphabet(guessedRandomLetter)
-	randomGuessedChar.letter = guessedRandomLetter
-	randomGuessedChar.index = randomLetterIndex
+	var alphabetIndex = getIndexInArabicAlphabet(hintRandomLetter)
+	randomHintChar.letter = hintRandomLetter
+	randomHintChar.index = randomLetterIndex
 	
 	for i in range(row, ATTEMPT_COUNT):
 		var slot = get_slot(i, randomLetterIndex)
-		slot.get_node("Label").text = guessedRandomLetter
+		slot.get_node("Label").text = hintRandomLetter
 		slot.get_node("Slot").texture = right
 	
 	setStatus(styleBox, alphabetIndex, "right")
@@ -327,6 +329,7 @@ func _on_guess_pressed() -> void:
 	keyboardKey.add_theme_stylebox_override("normal", styleBox)
 	keyboardKey.add_theme_stylebox_override("pressed", styleBox)
 	keyboardKey.add_theme_stylebox_override("hover", styleBox)
+	if !muted: get_node("sfx/hint").play()
 	jumpCol()  # jumps one column if the selected slot is equal to the guessed letter slot
 	
 

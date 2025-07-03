@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://vsb4akym35c"]
+[gd_scene load_steps=50 format=3 uid="uid://vsb4akym35c"]
 
 [ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_muem4"]
 [ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="1_xslwc"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://ycq4e82j062j" path="res://resources/sfx/right.mp3" id="9_d16bv"]
 [ext_resource type="Texture2D" uid="uid://dehoa3jli78as" path="res://resources/pause_normal.png" id="12_uwlf8"]
 [ext_resource type="Texture2D" uid="uid://cfqsh5a823nmg" path="res://resources/pause_pressed.png" id="13_q8rc5"]
+[ext_resource type="AudioStream" uid="uid://cgwfi78fafwm4" path="res://resources/sfx/hint.mp3" id="13_yc10j"]
 [ext_resource type="Texture2D" uid="uid://oniqmd3dpc4r" path="res://resources/volume-up.svg" id="14_pjfkq"]
 [ext_resource type="Shader" uid="uid://bnmcq5av2qv54" path="res://shaders/win.gdshader" id="16_5aa60"]
 [ext_resource type="Shader" uid="uid://b6r7wyfl3k8pa" path="res://shaders/lose.gdshader" id="17_t54y0"]
@@ -341,6 +342,9 @@ stream = ExtResource("8_u8q6v")
 
 [node name="right" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("9_d16bv")
+
+[node name="hint" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("13_yc10j")
 
 [node name="GameContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
@@ -1523,14 +1527,14 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_xk3vp")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_l1cdg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
 
-[node name="GuessContainer" type="MarginContainer" parent="."]
+[node name="HintContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_top = 66
 theme_override_constants/margin_right = 30
 
-[node name="Guess" type="Button" parent="GuessContainer"]
+[node name="Hint" type="Button" parent="HintContainer"]
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gqmmt")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_jscy8")
@@ -1547,4 +1551,4 @@ text = "💡"
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/mute" to="." method="_on_mute_pressed"]
-[connection signal="pressed" from="GuessContainer/Guess" to="." method="_on_guess_pressed"]
+[connection signal="pressed" from="HintContainer/Hint" to="." method="_on_hint_pressed"]
