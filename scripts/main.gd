@@ -77,7 +77,7 @@ func _on_check_pressed() -> void:
 		return
 	input_blocked = true
 	var answerArray = answer.split("")
-	if (randomGuessedChar.index and randomGuessedChar.letter):  # Ensures that user actually guessed
+	if (randomGuessedChar.index != null and randomGuessedChar.letter):  # Ensures that user actually guessed
 		guessedWordArray[randomGuessedChar.index] = randomGuessedChar.letter  # if user guessed a letter, then the guess is stored
 	var guessedWord : String = ''.join(guessedWordArray)
 	# if a new dictionary is found, add this condition to the if-condition below:
@@ -133,6 +133,7 @@ func _on_check_pressed() -> void:
 		return
 	col = 0
 	row += 1
+	if row <= 5: jumpCol()
 	if row > 5:
 		get_node("graphics/lose screen/answer").text += answer
 		get_node("graphics/lose screen").visible = true
@@ -259,8 +260,8 @@ func setTopGameMargin(height : int):
 func isLetterAlreadySolved(letterIndex) -> bool:  # is letter already solved by user
 	for i in range(ATTEMPT_COUNT):
 		for j in range(WORD_LENGTH):
-			if (get_slot(i, j).get_node("Slot").texture == right and j == letterIndex):
-				return true
+			if (get_slot(i, j).get_node("Slot").texture == right and j == letterIndex):  # if at any row, the slot is green and the index of that slot is the same as
+				return true																 # letter index, then it is already solved, so find another guess
 	return false
 
 func _on_mute_pressed() -> void:
@@ -307,17 +308,15 @@ func _on_guess_pressed() -> void:
 	
 	var randomLetterIndex : int = randi() % WORD_LENGTH
 	var guessedRandomLetter = answer[randomLetterIndex]
-	print(guessedRandomLetter)
 	while (isLetterAlreadySolved(randomLetterIndex)):
 		randomLetterIndex = randi() % WORD_LENGTH
 		guessedRandomLetter = answer[randomLetterIndex]
-		print(guessedRandomLetter)
 	
 	var alphabetIndex = getIndexInArabicAlphabet(guessedRandomLetter)
 	randomGuessedChar.letter = guessedRandomLetter
 	randomGuessedChar.index = randomLetterIndex
 	
-	for i in range(row, 6):
+	for i in range(row, ATTEMPT_COUNT):
 		var slot = get_slot(i, randomLetterIndex)
 		slot.get_node("Label").text = guessedRandomLetter
 		slot.get_node("Slot").texture = right
@@ -328,7 +327,7 @@ func _on_guess_pressed() -> void:
 	keyboardKey.add_theme_stylebox_override("normal", styleBox)
 	keyboardKey.add_theme_stylebox_override("pressed", styleBox)
 	keyboardKey.add_theme_stylebox_override("hover", styleBox)
-	jumpCol()
+	jumpCol()  # jumps one column if the selected slot is equal to the guessed letter slot
 	
 
 func _notification(what: int) -> void:
