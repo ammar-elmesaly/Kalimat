@@ -1,7 +1,7 @@
 [gd_scene load_steps=50 format=3 uid="uid://vsb4akym35c"]
 
 [ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_5newe"]
-[ext_resource type="Script" uid="uid://h4a17okko0hk" path="res://scripts/main.gd" id="2_37s47"]
+[ext_resource type="Script" uid="uid://h4a17okko0hk" path="res://scripts/game.gd" id="2_5newe"]
 [ext_resource type="Script" uid="uid://lljg7hk1ms6j" path="res://scripts/parallax_background.gd" id="3_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://chomveywrgmam" path="res://resources/sky_small_blurred.png" id="4_e1j6l"]
 [ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="5_pl11u"]
@@ -145,7 +145,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_5newe")
-script = ExtResource("2_37s47")
+script = ExtResource("2_5newe")
 metadata/_edit_vertical_guides_ = [-7.0, -2.0]
 
 [node name="graphics" type="Node" parent="."]
@@ -211,6 +211,7 @@ theme_override_font_sizes/font_size = 28
 text = "عودة للعبة"
 
 [node name="replay" type="Button" parent="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_pl11u")
 theme_override_font_sizes/font_size = 28
@@ -237,6 +238,7 @@ text = "لقد ربحت اللعبة!"
 horizontal_alignment = 1
 
 [node name="replay" type="Button" parent="graphics/win screen"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -290,6 +292,7 @@ text = "الإجابة: "
 horizontal_alignment = 1
 
 [node name="replay" type="Button" parent="graphics/lose screen"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -301,6 +304,70 @@ offset_right = 73.0
 offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_pl11u")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="tie screen" type="CanvasLayer" parent="graphics"]
+visible = false
+
+[node name="Label" type="Label" parent="graphics/tie screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -158.5
+offset_right = 109.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_pl11u")
+theme_override_font_sizes/font_size = 40
+text = "تعادل"
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="graphics/tie screen"]
+visible = false
+offset_left = 503.0
+offset_top = 335.5
+offset_right = 649.0
+offset_bottom = 397.5
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("5_pl11u")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="tie screen2" type="CanvasLayer" parent="graphics"]
+visible = false
+
+[node name="Label" type="Label" parent="graphics/tie screen2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -158.5
+offset_right = 109.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_pl11u")
+theme_override_font_sizes/font_size = 40
+text = "تعادل"
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="graphics/tie screen2"]
+visible = false
+offset_left = 503.0
+offset_top = 335.5
+offset_right = 649.0
+offset_bottom = 397.5
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("5_pl11u")
 theme_override_font_sizes/font_size = 28
 text = "إعادة اللعب"
@@ -337,6 +404,18 @@ visible = false
 
 [node name="blur" type="ColorRect" parent="graphics/shader layers/lose layer"]
 material = SubResource("ShaderMaterial_bimdd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tie layer" type="CanvasLayer" parent="graphics/shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="graphics/shader layers/tie layer"]
+material = SubResource("ShaderMaterial_7s155")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1547,7 +1626,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_top = 66
+theme_override_constants/margin_top = 134
 theme_override_constants/margin_right = 30
 
 [node name="Hint" type="Button" parent="HintContainer"]
@@ -1560,10 +1639,24 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_y6deb")
 theme_override_styles/normal = SubResource("StyleBoxTexture_pm3ni")
 text = "💡"
 
+[node name="MultiplayerStatus" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MultiplayerStatus"]
+layout_mode = 2
+text = "حالة الخصم: غير متصل"
+
 [connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/unpause" to="." method="_on_unpause_pressed"]
 [connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="graphics/win screen/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="graphics/lose screen/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/tie screen/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/tie screen2/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/check" to="." method="_on_check_pressed"]
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/pause" to="." method="_on_pause_pressed"]

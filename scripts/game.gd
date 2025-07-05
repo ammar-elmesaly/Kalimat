@@ -30,7 +30,7 @@ const WORD_LENGTH : int = 5
 const ATTEMPT_COUNT : int = 6
 const ALPHABET_LETTER_NUMBER : int = 30
 
-var row : int = 0
+var row : int = 4
 var col : int = 0
 var answer : String
 var guessedWordArray : Array[String] = ["", "", "", "", ""]
@@ -43,10 +43,16 @@ var paused : bool = false
 var dictionaryArray = Array()
 
 var randomHintChar : RandomHintChar = RandomHintChar.new(null, null)
+var localStatus : String
+var remoteStatus: String
+var isHost : bool
 
 func _ready() -> void:
+	localStatus = "يلعب"
+	isHost = multiplayer.get_unique_id() == 1 
 	dictionaryArray = loadDictionary()
 	answer = randomWord(dictionaryArray)
+	print(answer)
 	statusArray.resize(ALPHABET_LETTER_NUMBER)  # This sets the array for keeping keyboard buttons status
 	# This basically initializes the status of the 30 letters to be empty (the letters you click to choose from)
 	# and these letters have 4 states: (Yellow, Green, Dark Gray, Empty)
@@ -57,7 +63,27 @@ func _ready() -> void:
 		key.pressed.connect(_on_key_pressed.bind(key.text))  # This sets the buttons for listenting and binds the text as an argument
 	
 	set_responsive_size()
+
+
+func _process(_delta) -> void:
+	if get_other_peer_id() != multiplayer.get_unique_id():
+		rpc_id(get_other_peer_id(), "displayStatus", localStatus)
 	
+	if isHost and (getOponnentStatus() == "فاز" or localStatus == "فاز"):
+		get_node("graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/replay").visible = true
+		get_node("graphics/win screen/replay").visible = true
+		get_node("graphics/lose screen/replay").visible = true
+	
+	if localStatus == "خسر" and getOponnentStatus() == "خسر":
+		get_node("graphics/lose screen").visible = false  # hide lose
+		get_node("graphics/shader layers/lose layer").visible = false
+		
+		get_node("graphics/tie screen").visible = true
+		get_node("graphics/shader layers/tie layer").visible = true
+		localStatus = "تعادل"
+		if isHost:
+			get_node("graphics/tie screen/replay").visible = true
+
 func _on_key_pressed(letter : String) -> void:
 	if input_blocked:
 		return
@@ -138,15 +164,18 @@ func _on_check_pressed() -> void:
 	if ("".join(guessedWordArray) == answer):
 		get_node("graphics/win screen").visible = true
 		get_node("graphics/shader layers/win layer").visible = true
+		localStatus = "فاز"
+		rpc("opponentLost")
 		if !muted: get_node("sfx/win").play()
 		return
 	col = 0
 	row += 1
 	if row <= 5: jumpCol()
 	if row > 5:
-		get_node("graphics/lose screen/answer").text += answer
+		get_node("graphics/lose screen/answer").text = answer
 		get_node("graphics/lose screen").visible = true
 		get_node("graphics/shader layers/lose layer").visible = true
+		localStatus = "خسر"
 		return
 	var slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
@@ -288,7 +317,6 @@ func _on_mute_pressed() -> void:
 	get_node("ControlsContainer/controls/mute").add_theme_stylebox_override("hover", styleBox)
 
 
-	
 
 func _on_pause_pressed() -> void:
 	get_node("graphics/shader layers/pause layer").visible = true
@@ -303,7 +331,7 @@ func _on_unpause_pressed() -> void:
 
 
 func _on_replay_pressed() -> void:
-	get_tree().reload_current_scene()
+	rpc("replay")
 
 func _on_hint_pressed() -> void:
 	if input_blocked:
@@ -340,6 +368,36 @@ func _on_hint_pressed() -> void:
 	jumpCol()  # jumps one column if the selected slot is equal to the hint letter slot
 	
 
+# Multiplayer related functions
+
+func getOponnentStatus():
+	return $MultiplayerStatus/Label.text.trim_prefix("حالة الخصم: ")
+
+@rpc("any_peer")
+func displayStatus(status):
+	get_node("MultiplayerStatus/Label").text = 'حالة الخصم: ' + str(status)
+
+
+@rpc("any_peer", "call_local")
+func replay():
+	get_tree().reload_current_scene()
+	
+
+@rpc("any_peer")
+func opponentLost():
+	get_node("graphics/lose screen/answer").text = answer
+	get_node("graphics/lose screen").visible = true
+	get_node("graphics/shader layers/lose layer").visible = true
+	localStatus = "خسر"
+	
+	
+func get_other_peer_id() -> int:
+	for peer_id in multiplayer.get_peers():
+		if peer_id != multiplayer.get_unique_id():
+			return peer_id
+	return 1  # fallback (host)
+		
+		
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
 		set_responsive_size()

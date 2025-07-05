@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://gmpoprau0y0s"]
+
+[ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_vjb58"]
+[ext_resource type="Script" uid="uid://cyds0op32bkua" path="res://scripts/menu.gd" id="1_yqeox"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme = ExtResource("1_vjb58")
+script = ExtResource("1_yqeox")
+
+[node name="InstancesContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -53.5
+offset_right = 22.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 45
+
+[node name="HostButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "استضافة"
+
+[node name="JoinButton" type="Button" parent="ButtonsContainer"]
+layout_mode = 2
+text = "انضمام"
+
+[connection signal="pressed" from="ButtonsContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="ButtonsContainer/JoinButton" to="." method="_on_join_button_pressed"]
