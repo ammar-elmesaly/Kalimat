@@ -30,7 +30,7 @@ const WORD_LENGTH : int = 5
 const ATTEMPT_COUNT : int = 6
 const ALPHABET_LETTER_NUMBER : int = 30
 
-var row : int = 4
+var row : int = 0
 var col : int = 0
 var answer : String
 var guessedWordArray : Array[String] = ["", "", "", "", ""]
@@ -52,7 +52,6 @@ func _ready() -> void:
 	isHost = multiplayer.get_unique_id() == 1 
 	dictionaryArray = loadDictionary()
 	answer = randomWord(dictionaryArray)
-	print(answer)
 	statusArray.resize(ALPHABET_LETTER_NUMBER)  # This sets the array for keeping keyboard buttons status
 	# This basically initializes the status of the 30 letters to be empty (the letters you click to choose from)
 	# and these letters have 4 states: (Yellow, Green, Dark Gray, Empty)

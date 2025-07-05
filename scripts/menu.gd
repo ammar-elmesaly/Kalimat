@@ -2,12 +2,17 @@ extends Control
 
 var peer = ENetMultiplayerPeer.new()
 
-const PORT = 6502
-const ADDRESS = "localhost"
+var port : int
+var address : String
 
+func _ready() -> void:
+	for ip in IP.get_local_addresses():
+		$"IP Addresses".text += ip + '\n'
 
 func _on_host_button_pressed() -> void:
-	peer.create_server(PORT)
+	get_port_and_address()
+	peer.set_bind_ip(address) 
+	peer.create_server(port, 1)
 	multiplayer.multiplayer_peer = peer
 	_add_game()
 	multiplayer.peer_connected.connect(
@@ -16,12 +21,17 @@ func _on_host_button_pressed() -> void:
 			rpc("_add_newly_connected_game", id)
 	)
 	$ButtonsContainer.visible = false
+	$LineEditContainer.visible = false
+	$"IP Addresses".visible = false
+	print("Server ready on IPs: ", IP.get_local_addresses())
 
 func _on_join_button_pressed() -> void:
-	peer.create_client(ADDRESS, PORT)
+	get_port_and_address()
+	peer.create_client(address, port)
 	multiplayer.multiplayer_peer = peer
 	$ButtonsContainer.visible = false
-
+	$LineEditContainer.visible = false
+	$"IP Addresses".visible = false
 
 func _add_game(id = 1):
 	var game = preload("res://scenes/game.tscn").instantiate()
@@ -32,3 +42,8 @@ func _add_game(id = 1):
 @rpc
 func _add_newly_connected_game(id):
 	_add_game(id)
+
+
+func get_port_and_address():
+	port = int(get_node("LineEditContainer/VBoxContainer/port").text)
+	address = get_node("LineEditContainer/VBoxContainer/ip").text
