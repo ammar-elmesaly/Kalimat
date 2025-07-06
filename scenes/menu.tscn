@@ -35,18 +35,18 @@ texture = ExtResource("4_mhnvy")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="IP Addresses" type="Label" parent="."]
+[node name="IP Addresses" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 113.0
-offset_top = -17.0
-offset_right = 113.0
-offset_bottom = 14.0
+offset_top = -15.5
+offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 21
+fit_content = true
 
 [node name="InstancesContainer" type="Control" parent="."]
 layout_mode = 1
@@ -79,7 +79,6 @@ placeholder_text = "IP"
 [node name="port" type="LineEdit" parent="LineEditContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "12345"
 placeholder_text = "Port"
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="."]
@@ -105,5 +104,18 @@ text = "استضافة"
 layout_mode = 2
 text = "انضمام"
 
+[node name="StatsMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+
+[node name="openStats" type="Button" parent="StatsMarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "الاحصائيات"
+
 [connection signal="pressed" from="ButtonsContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="ButtonsContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="StatsMarginContainer/openStats" to="." method="_on_open_stats_pressed"]

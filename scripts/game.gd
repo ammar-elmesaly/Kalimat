@@ -79,6 +79,11 @@ func _process(_delta) -> void:
 		hideLoseScreen()
 		showTieScreen()
 		localStatus = "تعادل"
+		var save_data = StatsUtils.getStats()
+		save_data["ties"] += 1
+		save_data["losses"] -= 1  # since it is actually a draw not a loss
+		StatsUtils.setStats(save_data)
+		
 		if isHost:
 			get_node("graphics/tie screen/VBoxContainer/replay").visible = true
 	
@@ -172,6 +177,10 @@ func _on_check_pressed() -> void:
 		showWinScreen()
 		localStatus = "فاز"
 		rpc("opponentLost")
+		var save_data = StatsUtils.getStats()
+		save_data["wins"] += 1
+		StatsUtils.setStats(save_data)
+			
 		if !muted: get_node("sfx/win").play()
 		return
 	col = 0
@@ -180,6 +189,9 @@ func _on_check_pressed() -> void:
 	if row > 5:
 		showLoseScreen()
 		localStatus = "خسر"
+		var save_data = StatsUtils.getStats()
+		save_data["losses"] += 1
+		StatsUtils.setStats(save_data)
 		return
 	var slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
@@ -362,7 +374,10 @@ func _on_replay_pressed() -> void:
 func _on_hint_pressed() -> void:
 	if input_blocked:
 		return
-		
+	
+	var save_data = StatsUtils.getStats()
+	save_data["used_hint"] += 1
+	StatsUtils.setStats(save_data)
 	get_node("HintContainer/Hint").disabled = true
 	
 	var styleBox = StyleBoxTexture.new()
@@ -392,14 +407,8 @@ func _on_hint_pressed() -> void:
 	keyboardKey.add_theme_stylebox_override("hover", styleBox)
 	if !muted: get_node("sfx/hint").play()
 	jumpCol()  # jumps one column if the selected slot is equal to the hint letter slot
-	
-signal fill_input_fields_signal
 
 # Multiplayer related functions
-func emitFillInputSignal() -> void:
-	emit_signal("fill_input_fields_signal")
-	# Emits a signal when replay is pressed so user doesn't have to refill fields
-	# manually
 
 
 func setStatusLabelColor(status : String):
@@ -424,7 +433,7 @@ func displayStatus(status):
 @rpc("any_peer", "call_local")
 func replay():
 	get_tree().reload_current_scene()
-	emitFillInputSignal()
+	
 
 @rpc("any_peer")
 func opponentLost():
