@@ -36,7 +36,7 @@ var answer : String
 var guessedWordArray : Array[String] = ["", "", "", "", ""]
 var statusArray = Array()
 
-var input_blocked : bool = false
+var input_blocked : bool = true
 var muted : bool = false
 var paused : bool = false
 
@@ -46,6 +46,7 @@ var randomHintChar : RandomHintChar = RandomHintChar.new(null, null)
 var localStatus : String
 var remoteStatus: String
 var isHost : bool
+var isAnswerSet : bool = false
 
 func _ready() -> void:
 	localStatus = "يلعب"
@@ -74,14 +75,19 @@ func _process(_delta) -> void:
 		get_node("graphics/lose screen/replay").visible = true
 	
 	if localStatus == "خسر" and getOponnentStatus() == "خسر":
-		get_node("graphics/lose screen").visible = false  # hide lose
-		get_node("graphics/shader layers/lose layer").visible = false
-		
-		get_node("graphics/tie screen").visible = true
-		get_node("graphics/shader layers/tie layer").visible = true
+		hideLoseScreen()
+		showTieScreen()
 		localStatus = "تعادل"
 		if isHost:
-			get_node("graphics/tie screen/replay").visible = true
+			get_node("graphics/tie screen/VBoxContainer/replay").visible = true
+	
+	
+	if getOponnentStatus() == "يلعب":
+		input_blocked = false
+		if isHost and !isAnswerSet:
+			rpc("setAnswerRemote", answer)
+			isAnswerSet = true
+		
 
 func _on_key_pressed(letter : String) -> void:
 	if input_blocked:
@@ -161,8 +167,7 @@ func _on_check_pressed() -> void:
 			await get_tree().process_frame
 
 	if ("".join(guessedWordArray) == answer):
-		get_node("graphics/win screen").visible = true
-		get_node("graphics/shader layers/win layer").visible = true
+		showWinScreen()
 		localStatus = "فاز"
 		rpc("opponentLost")
 		if !muted: get_node("sfx/win").play()
@@ -171,9 +176,7 @@ func _on_check_pressed() -> void:
 	row += 1
 	if row <= 5: jumpCol()
 	if row > 5:
-		get_node("graphics/lose screen/answer").text = answer
-		get_node("graphics/lose screen").visible = true
-		get_node("graphics/shader layers/lose layer").visible = true
+		showLoseScreen()
 		localStatus = "خسر"
 		return
 	var slot = get_slot(row, col)
@@ -198,6 +201,28 @@ func _on_erase_pressed() -> void:
 	slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 
+
+func hideLoseScreen():
+	get_node("graphics/lose screen").visible = false
+	get_node("graphics/shader layers/lose layer").visible = false
+	
+	
+func showLoseScreen():
+	get_node("graphics/lose screen/answer").text = "الإجابة: " + answer
+	get_node("graphics/lose screen").visible = true
+	get_node("graphics/shader layers/lose layer").visible = true
+
+
+func showWinScreen():
+	get_node("graphics/win screen").visible = true
+	get_node("graphics/shader layers/win layer").visible = true
+	
+
+func showTieScreen():
+	get_node("graphics/tie screen/VBoxContainer/answer").text = "الإجابة: " + answer
+	get_node("graphics/tie screen").visible = true
+	get_node("graphics/shader layers/tie layer").visible = true
+	
 
 func jumpCol(backwards = false):
 	if col == randomHintChar.index:   # if the current slot is the hint char, jump one column
@@ -366,9 +391,14 @@ func _on_hint_pressed() -> void:
 	if !muted: get_node("sfx/hint").play()
 	jumpCol()  # jumps one column if the selected slot is equal to the hint letter slot
 	
+signal fill_input_fields_signal
 
 # Multiplayer related functions
-
+func emitFillInputSignal() -> void:
+	emit_signal("fill_input_fields_signal")
+	# Emits a signal when replay is pressed so user doesn't have to refill fields
+	# manually
+	
 func getOponnentStatus():
 	return $MultiplayerStatus/Label.text.trim_prefix("حالة الخصم: ")
 
@@ -380,7 +410,7 @@ func displayStatus(status):
 @rpc("any_peer", "call_local")
 func replay():
 	get_tree().reload_current_scene()
-	
+	emitFillInputSignal()
 
 @rpc("any_peer")
 func opponentLost():
@@ -388,6 +418,11 @@ func opponentLost():
 	get_node("graphics/lose screen").visible = true
 	get_node("graphics/shader layers/lose layer").visible = true
 	localStatus = "خسر"
+	
+
+@rpc("any_peer")
+func setAnswerRemote(remoteAnswer: String):
+	answer = remoteAnswer
 	
 	
 func get_other_peer_id() -> int:

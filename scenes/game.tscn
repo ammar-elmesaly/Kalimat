@@ -311,61 +311,39 @@ text = "إعادة اللعب"
 [node name="tie screen" type="CanvasLayer" parent="graphics"]
 visible = false
 
-[node name="Label" type="Label" parent="graphics/tie screen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="graphics/tie screen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.5
-offset_top = -158.5
-offset_right = 109.5
-offset_bottom = -81.5
+offset_left = -73.0
+offset_top = -112.0
+offset_right = 73.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("5_pl11u")
-theme_override_font_sizes/font_size = 40
-text = "تعادل"
-horizontal_alignment = 1
-
-[node name="replay" type="Button" parent="graphics/tie screen"]
-visible = false
-offset_left = 503.0
-offset_top = 335.5
-offset_right = 649.0
-offset_bottom = 397.5
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("5_pl11u")
-theme_override_font_sizes/font_size = 28
-text = "إعادة اللعب"
+theme_override_constants/separation = 23
 
-[node name="tie screen2" type="CanvasLayer" parent="graphics"]
-visible = false
-
-[node name="Label" type="Label" parent="graphics/tie screen2"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -109.5
-offset_top = -158.5
-offset_right = 109.5
-offset_bottom = -81.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Label" type="Label" parent="graphics/tie screen/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_pl11u")
 theme_override_font_sizes/font_size = 40
 text = "تعادل"
 horizontal_alignment = 1
 
-[node name="replay" type="Button" parent="graphics/tie screen2"]
+[node name="answer" type="Label" parent="graphics/tie screen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_pl11u")
+theme_override_font_sizes/font_size = 40
+text = "الإجابة: "
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="graphics/tie screen/VBoxContainer"]
 visible = false
-offset_left = 503.0
-offset_top = 335.5
-offset_right = 649.0
-offset_bottom = 397.5
+layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("5_pl11u")
@@ -1655,8 +1633,7 @@ text = "حالة الخصم: غير متصل"
 [connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="graphics/win screen/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="graphics/lose screen/replay" to="." method="_on_replay_pressed"]
-[connection signal="pressed" from="graphics/tie screen/replay" to="." method="_on_replay_pressed"]
-[connection signal="pressed" from="graphics/tie screen2/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/tie screen/VBoxContainer/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/check" to="." method="_on_check_pressed"]
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/pause" to="." method="_on_pause_pressed"]

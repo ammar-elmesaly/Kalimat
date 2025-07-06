@@ -23,7 +23,6 @@ func _on_host_button_pressed() -> void:
 	$ButtonsContainer.visible = false
 	$LineEditContainer.visible = false
 	$"IP Addresses".visible = false
-	print("Server ready on IPs: ", IP.get_local_addresses())
 
 func _on_join_button_pressed() -> void:
 	get_port_and_address()
@@ -37,7 +36,14 @@ func _add_game(id = 1):
 	var game = preload("res://scenes/game.tscn").instantiate()
 	game.set_multiplayer_authority(id)
 	$InstancesContainer.call_deferred("add_child", game)
+	game.connect("fill_input_fields_signal", _fill_input_fields)
 
+
+
+func _fill_input_fields():
+	get_node("LineEditContainer/VBoxContainer/ip").text = str(address)
+	get_node("LineEditContainer/VBoxContainer/port").text = str(port)
+	
 
 @rpc
 func _add_newly_connected_game(id):
