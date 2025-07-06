@@ -47,6 +47,7 @@ var localStatus : String
 var remoteStatus: String
 var isHost : bool
 var isAnswerSet : bool = false
+var playerJoined : bool = false
 
 func _ready() -> void:
 	localStatus = "يلعب"
@@ -82,11 +83,12 @@ func _process(_delta) -> void:
 			get_node("graphics/tie screen/VBoxContainer/replay").visible = true
 	
 	
-	if getOponnentStatus() == "يلعب":
+	if getOponnentStatus() == "يلعب" and !playerJoined:
 		input_blocked = false
 		if isHost and !isAnswerSet:
 			rpc("setAnswerRemote", answer)
 			isAnswerSet = true
+		playerJoined = true
 		
 
 func _on_key_pressed(letter : String) -> void:
@@ -398,13 +400,25 @@ func emitFillInputSignal() -> void:
 	emit_signal("fill_input_fields_signal")
 	# Emits a signal when replay is pressed so user doesn't have to refill fields
 	# manually
-	
+
+
+func setStatusLabelColor(status : String):
+	if status == "يلعب":
+		get_node("MultiplayerStatus/Label").add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	elif status == "فاز":
+		get_node("MultiplayerStatus/Label").add_theme_color_override("font_color", Color(0.824, 0.149, 0.0, 1))
+	elif status == "خسر":
+		get_node("MultiplayerStatus/Label").add_theme_color_override("font_color", Color(0.314, 0.588, 0.0, 1))
+	else: # disconnected
+		get_node("MultiplayerStatus/Label").add_theme_color_override("font_color", Color(0.378, 0.378, 0.378, 1))
+		
 func getOponnentStatus():
 	return $MultiplayerStatus/Label.text.trim_prefix("حالة الخصم: ")
 
 @rpc("any_peer")
 func displayStatus(status):
 	get_node("MultiplayerStatus/Label").text = 'حالة الخصم: ' + str(status)
+	setStatusLabelColor(status)
 
 
 @rpc("any_peer", "call_local")
