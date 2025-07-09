@@ -26,6 +26,40 @@ class RandomHintChar:
 	"wrong" : wrong
 }
 
+@onready var asciiToArabic = {
+	65: 'ش',
+	68: 'ي',
+	69: 'ث',
+	70: 'ب',
+	71: 'ل',
+	72: 'ا',
+	73: 'ه',
+	74: 'ت',
+	75: 'ن',
+	76: 'م',
+	77: 'ة',
+	78: 'ى',
+	79: 'خ',
+	80: 'ح',
+	81: 'ض',
+	82: 'ق',
+	83: 'س',
+	84: 'ف',
+	85: 'ع',
+	86: 'ر',
+	87: 'ص',
+	88: 'ء',
+	89: 'غ',
+	91: 'ج',
+	93: 'د',
+	96: 'ذ',
+	39: 'ط',
+	59: 'ك',
+	47: 'ظ',
+	46: 'ز',
+	44: 'و'
+	
+}
 const WORD_LENGTH : int = 5
 const ATTEMPT_COUNT : int = 6
 const ALPHABET_LETTER_NUMBER : int = 30
@@ -46,12 +80,20 @@ var randomHintChar : RandomHintChar = RandomHintChar.new(null, null)
 var localStatus : String
 var remoteStatus: String
 var isHost : bool
-var isAnswerSet : bool = false
-var playerJoined : bool = false
+var isDraw : bool = false
 
+func _enter_tree() -> void:
+	isHost = multiplayer.get_unique_id() == 1
+	if !isHost:
+		rpc("hideReplayButton")
+		rpc("enableInput")
+		rpc("setAnswer")
+		rpc("requestHostToSetAnswer")  # Basically this calls an rpc on an rpc
+		# so this equivalent of making a host call a function on itself to pass the answer
+		# to the peer
+		
 func _ready() -> void:
 	localStatus = "يلعب"
-	isHost = multiplayer.get_unique_id() == 1 
 	dictionaryArray = loadDictionary()
 	answer = randomWord(dictionaryArray)
 	statusArray.resize(ALPHABET_LETTER_NUMBER)  # This sets the array for keeping keyboard buttons status
@@ -75,26 +117,28 @@ func _process(_delta) -> void:
 		get_node("graphics/win screen/replay").visible = true
 		get_node("graphics/lose screen/replay").visible = true
 	
-	if localStatus == "خسر" and getOponnentStatus() == "خسر":
+	if localStatus == "خسر" and getOponnentStatus() == "خسر" and !isDraw:
 		hideLoseScreen()
 		showTieScreen()
 		localStatus = "تعادل"
 		var save_data = StatsUtils.getStats()
 		save_data["ties"] += 1
-		save_data["losses"] -= 1  # since it is actually a draw not a loss
 		StatsUtils.setStats(save_data)
 		
 		if isHost:
 			get_node("graphics/tie screen/VBoxContainer/replay").visible = true
-	
-	
-	if getOponnentStatus() == "يلعب" and !playerJoined:
-		input_blocked = false
-		if isHost and !isAnswerSet:
-			rpc("setAnswerRemote", answer)
-			isAnswerSet = true
-		playerJoined = true
 		
+		isDraw = true
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if asciiToArabic.has(event.keycode):
+			_on_key_pressed(asciiToArabic[event.keycode])
+		elif event.keycode == KEY_ENTER:
+			_on_check_pressed()
+		elif event.keycode == KEY_BACKSPACE:
+			_on_erase_pressed()
 
 func _on_key_pressed(letter : String) -> void:
 	if input_blocked:
@@ -189,10 +233,8 @@ func _on_check_pressed() -> void:
 	if row > 5:
 		showLoseScreen()
 		localStatus = "خسر"
-		var save_data = StatsUtils.getStats()
-		save_data["losses"] += 1
-		StatsUtils.setStats(save_data)
 		return
+		
 	var slot = get_slot(row, col)
 	slot.get_node("Slot").texture = selected
 	input_blocked = false
@@ -441,13 +483,31 @@ func opponentLost():
 	get_node("graphics/lose screen").visible = true
 	get_node("graphics/shader layers/lose layer").visible = true
 	localStatus = "خسر"
+	var save_data = StatsUtils.getStats()
+	save_data["losses"] += 1
+	StatsUtils.setStats(save_data)
 	
 
 @rpc("any_peer")
 func setAnswerRemote(remoteAnswer: String):
 	answer = remoteAnswer
 	
+
+@rpc("any_peer", "call_local")
+func hideReplayButton():
+	get_node("graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/replay").visible = false
+
+
+@rpc("any_peer", "call_local")
+func enableInput():
+	input_blocked = false
+
+
+@rpc("any_peer")
+func requestHostToSetAnswer():
+	rpc("setAnswerRemote", answer)
 	
+
 func get_other_peer_id() -> int:
 	for peer_id in multiplayer.get_peers():
 		if peer_id != multiplayer.get_unique_id():

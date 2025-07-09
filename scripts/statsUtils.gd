@@ -8,7 +8,8 @@ func getStats():
 		var save_data = JSON.parse_string(content)
 		return save_data
 	else:
-		return -1
+		initStats()
+		return getStats()
 
 
 func setStats(save_data):

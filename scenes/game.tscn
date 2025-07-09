@@ -211,7 +211,6 @@ theme_override_font_sizes/font_size = 28
 text = "عودة للعبة"
 
 [node name="replay" type="Button" parent="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_pl11u")
 theme_override_font_sizes/font_size = 28
@@ -1618,9 +1617,11 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_pm3ni")
 text = "💡"
 
 [node name="MultiplayerStatus" type="MarginContainer" parent="."]
+z_index = 20
+y_sort_enabled = true
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 173.0
+offset_bottom = 59.0
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 8
