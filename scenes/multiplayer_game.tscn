@@ -1,0 +1,1643 @@
+[gd_scene load_steps=50 format=3 uid="uid://vsb4akym35c"]
+
+[ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_cagh4"]
+[ext_resource type="Script" uid="uid://h4a17okko0hk" path="res://scripts/multiplayer_game.gd" id="2_f7ic7"]
+[ext_resource type="Script" uid="uid://lljg7hk1ms6j" path="res://scripts/parallax_background.gd" id="3_yf1tq"]
+[ext_resource type="Texture2D" uid="uid://chomveywrgmam" path="res://resources/sky_small_blurred.png" id="4_e5n2p"]
+[ext_resource type="FontFile" uid="uid://bfb8f7ty8ty6y" path="res://resources/Noto_Kufi_Arabic/NotoKufiArabic-VariableFont_wght.ttf" id="5_2b7re"]
+[ext_resource type="Shader" uid="uid://boy75mx7e8ws7" path="res://shaders/pause.gdshader" id="6_dkp43"]
+[ext_resource type="Shader" uid="uid://bnmcq5av2qv54" path="res://shaders/win.gdshader" id="7_eyey8"]
+[ext_resource type="Shader" uid="uid://b6r7wyfl3k8pa" path="res://shaders/lose.gdshader" id="8_sccqd"]
+[ext_resource type="AudioStream" uid="uid://bnddumbtltoxo" path="res://resources/sfx/click.mp3" id="9_wdrwi"]
+[ext_resource type="AudioStream" uid="uid://dc3vlllsxt5t8" path="res://resources/sfx/enter.mp3" id="10_qj6pn"]
+[ext_resource type="AudioStream" uid="uid://dtycutxbxxgyw" path="res://resources/sfx/wrong.mp3" id="11_5rhcc"]
+[ext_resource type="AudioStream" uid="uid://ycq4e82j062j" path="res://resources/sfx/right.mp3" id="12_fcw7k"]
+[ext_resource type="AudioStream" uid="uid://cgwfi78fafwm4" path="res://resources/sfx/hint.mp3" id="13_3lhi8"]
+[ext_resource type="Texture2D" uid="uid://b57locmlwn6r1" path="res://resources/empty_slot.png" id="14_i7u2e"]
+[ext_resource type="Texture2D" uid="uid://wng30vf46bas" path="res://resources/enter.png" id="15_2wcnq"]
+[ext_resource type="Texture2D" uid="uid://51sluuder6os" path="res://resources/new_del.png" id="16_x0vrp"]
+[ext_resource type="Texture2D" uid="uid://dehoa3jli78as" path="res://resources/pause_normal.png" id="17_gsyhi"]
+[ext_resource type="Texture2D" uid="uid://cfqsh5a823nmg" path="res://resources/pause_pressed.png" id="18_2v6gc"]
+[ext_resource type="Texture2D" uid="uid://oniqmd3dpc4r" path="res://resources/volume-up.svg" id="19_0aw3a"]
+[ext_resource type="Texture2D" uid="uid://bilnfax0g7vj8" path="res://resources/guess_used.png" id="20_fkmm8"]
+[ext_resource type="Texture2D" uid="uid://ct6onos13ug3h" path="res://resources/guess_available.png" id="21_mekma"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7s155"]
+shader = ExtResource("6_dkp43")
+shader_parameter/lod = 2.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpdrk"]
+shader = ExtResource("7_eyey8")
+shader_parameter/lod = 2.8
+shader_parameter/green_boost = 1.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bimdd"]
+shader = ExtResource("8_sccqd")
+shader_parameter/lod = 2.8
+shader_parameter/red_boost = 2.2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_70r5x"]
+texture = ExtResource("14_i7u2e")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_scggn"]
+texture = ExtResource("14_i7u2e")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_snudb"]
+texture = ExtResource("14_i7u2e")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7ocb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ugrw"]
+texture = ExtResource("15_2wcnq")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tyr4w"]
+texture = ExtResource("15_2wcnq")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_46qjj"]
+texture = ExtResource("15_2wcnq")
+texture_margin_left = 20.0
+texture_margin_right = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jndie"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6fp8"]
+texture = ExtResource("16_x0vrp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tng7k"]
+texture = ExtResource("16_x0vrp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1sluw"]
+texture = ExtResource("16_x0vrp")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avech"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_84sy7"]
+texture = ExtResource("17_gsyhi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xb0gw"]
+texture = ExtResource("18_2v6gc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_02sy3"]
+texture = ExtResource("17_gsyhi")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eh0ew"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xk3vp"]
+texture = ExtResource("19_0aw3a")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l1cdg"]
+texture = ExtResource("19_0aw3a")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yytae"]
+texture = ExtResource("19_0aw3a")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqmmt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jscy8"]
+texture = ExtResource("20_fkmm8")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gqmmt"]
+texture = ExtResource("21_mekma")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yc10j"]
+texture = ExtResource("21_mekma")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y6deb"]
+texture = ExtResource("21_mekma")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pm3ni"]
+texture = ExtResource("21_mekma")
+texture_margin_left = 20.0
+texture_margin_top = 5.0
+texture_margin_right = 20.0
+texture_margin_bottom = 5.0
+
+[node name="main" type="Control"]
+layout_direction = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_cagh4")
+script = ExtResource("2_f7ic7")
+metadata/_edit_vertical_guides_ = [-7.0, -2.0]
+
+[node name="graphics" type="Node" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="graphics"]
+script = ExtResource("3_yf1tq")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="graphics/ParallaxBackground"]
+motion_offset = Vector2(1, 0)
+motion_mirroring = Vector2(400, 400)
+
+[node name="TextureRect" type="TextureRect" parent="graphics/ParallaxBackground/ParallaxLayer"]
+offset_left = -2405.0
+offset_bottom = 2405.0
+texture = ExtResource("4_e5n2p")
+stretch_mode = 1
+
+[node name="pause menu" type="CanvasLayer" parent="graphics"]
+visible = false
+
+[node name="Label" type="Label" parent="graphics/pause menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -158.5
+offset_right = 109.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 40
+text = "إيقاف مؤقت"
+horizontal_alignment = 1
+
+[node name="ButtonsContainerMargin" type="MarginContainer" parent="graphics/pause menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -88.5
+offset_right = 73.0
+offset_bottom = 88.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 85
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="graphics/pause menu/ButtonsContainerMargin"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 53
+
+[node name="unpause" type="Button" parent="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer"]
+z_index = 8
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 28
+text = "عودة للعبة"
+
+[node name="replay" type="Button" parent="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="win screen" type="CanvasLayer" parent="graphics"]
+visible = false
+
+[node name="Label" type="Label" parent="graphics/win screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.5
+offset_top = -158.5
+offset_right = 138.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 40
+text = "لقد ربحت اللعبة!"
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="graphics/win screen"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -31.0
+offset_right = 73.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="lose screen" type="CanvasLayer" parent="graphics"]
+visible = false
+
+[node name="Label" type="Label" parent="graphics/lose screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -158.5
+offset_right = 109.5
+offset_bottom = -81.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 40
+text = "لقد خسرت!"
+horizontal_alignment = 1
+
+[node name="answer" type="Label" parent="graphics/lose screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = 57.5
+offset_right = 109.5
+offset_bottom = 134.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 40
+text = "الإجابة: "
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="graphics/lose screen"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -31.0
+offset_right = 73.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="tie screen" type="CanvasLayer" parent="graphics"]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="graphics/tie screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -112.0
+offset_right = 73.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 23
+
+[node name="Label" type="Label" parent="graphics/tie screen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 40
+text = "تعادل"
+horizontal_alignment = 1
+
+[node name="answer" type="Label" parent="graphics/tie screen/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 40
+text = "الإجابة: "
+horizontal_alignment = 1
+
+[node name="replay" type="Button" parent="graphics/tie screen/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("5_2b7re")
+theme_override_font_sizes/font_size = 28
+text = "إعادة اللعب"
+
+[node name="shader layers" type="Node" parent="graphics"]
+
+[node name="pause layer" type="CanvasLayer" parent="graphics/shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="graphics/shader layers/pause layer"]
+material = SubResource("ShaderMaterial_7s155")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="win layer" type="CanvasLayer" parent="graphics/shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="graphics/shader layers/win layer"]
+material = SubResource("ShaderMaterial_vpdrk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lose layer" type="CanvasLayer" parent="graphics/shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="graphics/shader layers/lose layer"]
+material = SubResource("ShaderMaterial_bimdd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="tie layer" type="CanvasLayer" parent="graphics/shader layers"]
+layer = 0
+visible = false
+
+[node name="blur" type="ColorRect" parent="graphics/shader layers/tie layer"]
+material = SubResource("ShaderMaterial_7s155")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="sfx" type="Node" parent="."]
+
+[node name="click" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("9_wdrwi")
+volume_db = 9.0
+
+[node name="win" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("10_qj6pn")
+volume_db = -0.065
+
+[node name="wrong" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("11_5rhcc")
+
+[node name="right" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("12_fcw7k")
+
+[node name="hint" type="AudioStreamPlayer2D" parent="sfx"]
+stream = ExtResource("13_3lhi8")
+
+[node name="GameContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="game" type="VBoxContainer" parent="GameContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+theme_override_constants/separation = 365
+
+[node name="WordsMarginContainer" type="MarginContainer" parent="GameContainer/game"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="words" type="Control" parent="GameContainer/game/WordsMarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="GameContainer/game/WordsMarginContainer/words"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 300.0
+grow_horizontal = 2
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 60
+columns = 5
+
+[node name="slot_0" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_0"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_1" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_1"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_2" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_2"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_3" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_3"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_4" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_4"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_5" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_5"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_6" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_6"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_7" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_7"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_8" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_8"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_9" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_9"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_10" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_10"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_11" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_11"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_12" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_12"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_13" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_13"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_14" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_14"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_15" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_15"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_16" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_16"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_16"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_17" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_17"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_17"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_18" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_18"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_18"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_19" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_19"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_19"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_20" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_20"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_20"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_21" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_21"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_21"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_22" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_22"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_22"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_23" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_23"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_23"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="slot_24" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_24"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_24"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="slot_25" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_25"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_25"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="slot_26" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_26"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_26"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="slot_27" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_27"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_27"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="slot_28" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_28"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_28"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="slot_29" type="Control" parent="GameContainer/game/WordsMarginContainer/words/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot" type="Sprite2D" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_29"]
+texture = ExtResource("14_i7u2e")
+
+[node name="Label" type="Label" parent="GameContainer/game/WordsMarginContainer/words/GridContainer/slot_29"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -81.0
+offset_right = 28.5
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="KeyboardMarginContainer" type="MarginContainer" parent="GameContainer/game"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_bottom = 90
+
+[node name="keyboard" type="GridContainer" parent="GameContainer/game/KeyboardMarginContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 10
+columns = 8
+
+[node name="key_0" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ا"
+
+[node name="key_1" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ب"
+
+[node name="key_2" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ت"
+
+[node name="key_3" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ث"
+
+[node name="key_4" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ج"
+
+[node name="key_5" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ح"
+
+[node name="key_6" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "خ"
+
+[node name="key_7" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "د"
+
+[node name="key_8" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ذ"
+
+[node name="key_9" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ر"
+
+[node name="key_10" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ز"
+
+[node name="key_11" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "س"
+
+[node name="key_12" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ش"
+
+[node name="key_13" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ص"
+
+[node name="key_14" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ض"
+
+[node name="key_15" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ط"
+
+[node name="key_16" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ظ"
+
+[node name="key_17" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ع"
+
+[node name="key_18" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "غ"
+
+[node name="key_19" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ف"
+
+[node name="key_20" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ق"
+
+[node name="key_21" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ك"
+
+[node name="key_22" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ل"
+
+[node name="key_23" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "م"
+
+[node name="key_24" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ن"
+
+[node name="key_25" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ه"
+
+[node name="key_26" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "و"
+
+[node name="key_27" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ي"
+
+[node name="key_28" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ة"
+
+[node name="key_29" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_70r5x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_scggn")
+theme_override_styles/normal = SubResource("StyleBoxTexture_snudb")
+text = "ء"
+
+[node name="check" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n7ocb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_1ugrw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tyr4w")
+theme_override_styles/normal = SubResource("StyleBoxTexture_46qjj")
+text = "جرِّب"
+
+[node name="erase" type="Button" parent="GameContainer/game/KeyboardMarginContainer/keyboard"]
+custom_minimum_size = Vector2(52, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jndie")
+theme_override_styles/hover = SubResource("StyleBoxTexture_e6fp8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tng7k")
+theme_override_styles/normal = SubResource("StyleBoxTexture_1sluw")
+
+[node name="ControlsContainer" type="MarginContainer" parent="."]
+z_index = 1000
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_bottom = 150.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 66
+
+[node name="controls" type="VBoxContainer" parent="ControlsContainer"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="pause" type="Button" parent="ControlsContainer/controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_avech")
+theme_override_styles/hover = SubResource("StyleBoxTexture_84sy7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xb0gw")
+theme_override_styles/normal = SubResource("StyleBoxTexture_02sy3")
+
+[node name="mute" type="Button" parent="ControlsContainer/controls"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_eh0ew")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xk3vp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_l1cdg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_yytae")
+
+[node name="HintContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 134
+theme_override_constants/margin_right = 30
+
+[node name="Hint" type="Button" parent="HintContainer"]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gqmmt")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_jscy8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_gqmmt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_yc10j")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y6deb")
+theme_override_styles/normal = SubResource("StyleBoxTexture_pm3ni")
+text = "💡"
+
+[node name="MultiplayerStatus" type="MarginContainer" parent="."]
+z_index = 20
+y_sort_enabled = true
+layout_mode = 0
+offset_right = 173.0
+offset_bottom = 59.0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MultiplayerStatus"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.377919, 0.377919, 0.377919, 1)
+text = "حالة الخصم: غير متصل"
+
+[connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/unpause" to="." method="_on_unpause_pressed"]
+[connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/win screen/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/lose screen/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/tie screen/VBoxContainer/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/check" to="." method="_on_check_pressed"]
+[connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
+[connection signal="pressed" from="ControlsContainer/controls/pause" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="ControlsContainer/controls/mute" to="." method="_on_mute_pressed"]
+[connection signal="pressed" from="HintContainer/Hint" to="." method="_on_hint_pressed"]

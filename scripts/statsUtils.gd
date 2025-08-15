@@ -1,5 +1,6 @@
 extends Node
 
+var previous_scene_path = ""
 
 func getStats():
 	if statsFileExists():
@@ -22,7 +23,9 @@ func initStats():
 	if !statsFileExists():
 		var save_data = {
 			"wins": 0,
+			"wins_solo": 0,
 			"losses": 0,
+			"losses_solo": 0,
 			"ties": 0,
 			"used_hint": 0
 		}

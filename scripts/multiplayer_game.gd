@@ -77,6 +77,9 @@ var paused : bool = false
 var dictionaryArray = Array()
 
 var randomHintChar : RandomHintChar = RandomHintChar.new(null, null)
+
+# Multiplayer vars
+
 var localStatus : String
 var remoteStatus: String
 var isHost : bool

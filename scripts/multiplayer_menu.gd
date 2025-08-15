@@ -8,7 +8,7 @@ var address : String
 func _ready() -> void:
 	for ip in IP.get_local_addresses():
 		if ip.contains("192.168"):
-			$"IP Addresses".text = "عنوانك الخاص بك: " + ip
+			$"IPMarginContainer/IP Addresses".text = "عنوانك الخاص بك: " + ip
 		
 	fill_input_fields()
 	
@@ -26,8 +26,9 @@ func _on_host_button_pressed() -> void:
 	)
 	$ButtonsContainer.visible = false
 	$LineEditContainer.visible = false
-	$"IP Addresses".visible = false
+	$"IPMarginContainer/IP Addresses".visible = false
 	$"StatsMarginContainer".visible = false
+	$"MainMenuButtonContainer".visible = false
 
 func _on_join_button_pressed() -> void:
 	get_port_and_address()
@@ -35,11 +36,12 @@ func _on_join_button_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 	$ButtonsContainer.visible = false
 	$LineEditContainer.visible = false
-	$"IP Addresses".visible = false
+	$"IPMarginContainer/IP Addresses".visible = false
 	$"StatsMarginContainer".visible = false
+	$"MainMenuButtonContainer".visible = false
 
 func _add_game(id = 1):
-	var game = preload("res://scenes/game.tscn").instantiate()
+	var game = preload("res://scenes/multiplayer_game.tscn").instantiate()
 	game.set_multiplayer_authority(id)
 	$InstancesContainer.call_deferred("add_child", game)
 
@@ -77,4 +79,9 @@ func save_port_and_address():
 	
 
 func _on_open_stats_pressed() -> void:
+	StatsUtils.previous_scene_path = get_tree().current_scene.scene_file_path
 	get_tree().change_scene_to_file("res://scenes/stats.tscn")
+
+
+func _on_to_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

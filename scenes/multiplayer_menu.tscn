@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://gmpoprau0y0s"]
 
-[ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_vjb58"]
-[ext_resource type="Script" uid="uid://cyds0op32bkua" path="res://scripts/menu.gd" id="1_yqeox"]
-[ext_resource type="Texture2D" uid="uid://w8auth5x2pkw" path="res://resources/menu-wallpaper.jpg" id="4_mhnvy"]
+[ext_resource type="Theme" uid="uid://cet12s7ldeodg" path="res://themes/theme_ui.tres" id="1_qmag2"]
+[ext_resource type="Script" uid="uid://cyds0op32bkua" path="res://scripts/multiplayer_menu.gd" id="2_2u85q"]
+[ext_resource type="Texture2D" uid="uid://w8auth5x2pkw" path="res://resources/multiplayer-menu-wallpaper.jpg" id="3_ltb6y"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -13,10 +13,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme = ExtResource("1_vjb58")
-script = ExtResource("1_yqeox")
+theme = ExtResource("1_qmag2")
+script = ExtResource("2_2u85q")
 
-[node name="Control" type="Control" parent="."]
+[node name="Background" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,29 +24,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Control"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Control/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 
-[node name="TextureRect" type="TextureRect" parent="Control/ParallaxBackground/ParallaxLayer"]
+[node name="TextureRect" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer"]
 offset_right = 3211.0
 offset_bottom = 1173.0
-texture = ExtResource("4_mhnvy")
+texture = ExtResource("3_ltb6y")
 expand_mode = 3
 stretch_mode = 4
-
-[node name="IP Addresses" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 21
-fit_content = true
 
 [node name="InstancesContainer" type="Control" parent="."]
 layout_mode = 1
@@ -74,11 +61,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(381, 0)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
 placeholder_text = "IP"
 
 [node name="port" type="LineEdit" parent="LineEditContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
 placeholder_text = "Port"
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="."]
@@ -98,24 +87,61 @@ theme_override_constants/separation = 45
 
 [node name="HostButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "استضافة"
 
 [node name="JoinButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "انضمام"
 
 [node name="StatsMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 40
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -185.0
+offset_bottom = 106.0
+grow_horizontal = 0
 theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
 
 [node name="openStats" type="Button" parent="StatsMarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "الاحصائيات"
 
+[node name="MainMenuButtonContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 185.0
+offset_bottom = 106.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+
+[node name="toMainMenuButton" type="Button" parent="MainMenuButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "الرئيسية"
+
+[node name="IPMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 123
+
+[node name="IP Addresses" type="RichTextLabel" parent="IPMarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 21
+text = "lorem ipsum"
+fit_content = true
+horizontal_alignment = 1
+
 [connection signal="pressed" from="ButtonsContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="ButtonsContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="StatsMarginContainer/openStats" to="." method="_on_open_stats_pressed"]
+[connection signal="pressed" from="MainMenuButtonContainer/toMainMenuButton" to="." method="_on_to_main_menu_button_pressed"]
