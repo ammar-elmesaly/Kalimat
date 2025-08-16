@@ -35,6 +35,31 @@ texture = ExtResource("3_ltb6y")
 expand_mode = 3
 stretch_mode = 4
 
+[node name="IPMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 123
+
+[node name="IP Addresses" type="RichTextLabel" parent="IPMarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 28
+fit_content = true
+horizontal_alignment = 1
+
+[node name="InstancesContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="LineEditContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -42,7 +67,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -190.5
 offset_right = 190.5
-offset_bottom = 152.0
+offset_bottom = 214.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 70
 
@@ -68,7 +93,7 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -185.0
-offset_bottom = 106.0
+offset_bottom = 134.0
 grow_horizontal = 0
 theme_override_constants/margin_top = 68
 theme_override_constants/margin_right = 40
@@ -81,7 +106,7 @@ text = "الاحصائيات"
 [node name="MainMenuButtonContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 offset_right = 185.0
-offset_bottom = 106.0
+offset_bottom = 134.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 68
 
@@ -89,31 +114,6 @@ theme_override_constants/margin_top = 68
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "الرئيسية"
-
-[node name="IPMarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_bottom = 123
-
-[node name="IP Addresses" type="RichTextLabel" parent="IPMarginContainer"]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 28
-fit_content = true
-horizontal_alignment = 1
-
-[node name="InstancesContainer" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="BackToMenu" type="Button" parent="."]
 visible = false
