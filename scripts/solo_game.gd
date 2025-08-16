@@ -178,6 +178,8 @@ func _on_check_pressed() -> void:
 
 		while paused:  # this stops for loop while pausing
 			await get_tree().process_frame
+			if !is_inside_tree():
+				return
 
 	if ("".join(guessedWordArray) == answer):
 		showWinScreen()
