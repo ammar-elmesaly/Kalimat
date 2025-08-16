@@ -39,6 +39,7 @@ func _on_join_button_pressed() -> void:
 	$"IPMarginContainer/IP Addresses".visible = false
 	$"StatsMarginContainer".visible = false
 	$"MainMenuButtonContainer".visible = false
+	$"BackToMenu".visible = true
 
 func _add_game(id = 1):
 	var game = preload("res://scenes/multiplayer_game.tscn").instantiate()
@@ -59,6 +60,7 @@ func fill_input_fields():
 
 @rpc
 func _add_newly_connected_game(id):
+	$BackToMenu.visible = false
 	_add_game(id)
 
 
@@ -85,3 +87,7 @@ func _on_open_stats_pressed() -> void:
 
 func _on_to_main_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+func _on_back_to_menu_pressed() -> void:
+	get_tree().reload_current_scene()

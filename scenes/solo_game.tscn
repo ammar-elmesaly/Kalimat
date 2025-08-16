@@ -195,7 +195,7 @@ offset_right = 73.0
 offset_bottom = 88.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 137
+theme_override_constants/margin_top = 278
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="graphics/pause menu/ButtonsContainerMargin"]
 layout_mode = 2
@@ -225,50 +225,55 @@ text = "الرئيسية"
 [node name="win screen" type="CanvasLayer" parent="graphics"]
 visible = false
 
-[node name="Label" type="Label" parent="graphics/win screen"]
+[node name="LabelMarginContainer" type="MarginContainer" parent="graphics/win screen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -138.5
-offset_top = -158.5
+offset_top = -98.5
 offset_right = 138.5
-offset_bottom = -81.5
+offset_bottom = 98.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_bottom = 410
+
+[node name="Label" type="Label" parent="graphics/win screen/LabelMarginContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_gfa4h")
 theme_override_font_sizes/font_size = 40
 text = "لقد ربحت اللعبة!"
 horizontal_alignment = 1
 
-[node name="replay" type="Button" parent="graphics/win screen"]
+[node name="ButtonsContainerMargin" type="MarginContainer" parent="graphics/win screen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -73.0
-offset_top = -31.0
+offset_top = -88.5
 offset_right = 73.0
-offset_bottom = 31.0
+offset_bottom = 88.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 137
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="graphics/win screen/ButtonsContainerMargin"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 36
+
+[node name="replay" type="Button" parent="graphics/win screen/ButtonsContainerMargin/ButtonsContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_gfa4h")
 theme_override_font_sizes/font_size = 28
 text = "إعادة اللعب"
 
-[node name="toMainMenu" type="Button" parent="graphics/win screen"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -55.0
-offset_top = -62.0
-offset_right = 55.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="toMainMenu" type="Button" parent="graphics/win screen/ButtonsContainerMargin/ButtonsContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_gfa4h")
 theme_override_font_sizes/font_size = 28
 text = "الرئيسية"
@@ -276,18 +281,22 @@ text = "الرئيسية"
 [node name="lose screen" type="CanvasLayer" parent="graphics"]
 visible = false
 
-[node name="Label" type="Label" parent="graphics/lose screen"]
+[node name="LabelMarginContainer" type="MarginContainer" parent="graphics/lose screen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.5
-offset_top = -158.5
-offset_right = 109.5
-offset_bottom = -81.5
+offset_left = -138.5
+offset_top = -98.5
+offset_right = 138.5
+offset_bottom = 98.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_bottom = 410
+
+[node name="Label" type="Label" parent="graphics/lose screen/LabelMarginContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_gfa4h")
 theme_override_font_sizes/font_size = 40
 text = "لقد خسرت!"
@@ -310,23 +319,35 @@ theme_override_font_sizes/font_size = 40
 text = "الإجابة: "
 horizontal_alignment = 1
 
-[node name="replay" type="Button" parent="graphics/lose screen"]
+[node name="ButtonsContainerMargin" type="MarginContainer" parent="graphics/lose screen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -73.0
-offset_top = -31.0
+offset_top = -88.5
 offset_right = 73.0
-offset_bottom = 31.0
+offset_bottom = 88.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 51
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="graphics/lose screen/ButtonsContainerMargin"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 36
+
+[node name="replay" type="Button" parent="graphics/lose screen/ButtonsContainerMargin/ButtonsContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_gfa4h")
 theme_override_font_sizes/font_size = 28
 text = "إعادة اللعب"
 
-[node name="toMainMenu" type="Button" parent="graphics/lose screen"]
+[node name="toMainMenu" type="Button" parent="graphics/lose screen/ButtonsContainerMargin/ButtonsContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("5_gfa4h")
 theme_override_font_sizes/font_size = 28
 text = "الرئيسية"
@@ -1601,10 +1622,10 @@ text = "💡"
 [connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/unpause" to="." method="_on_unpause_pressed"]
 [connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/replay" to="." method="_on_replay_pressed"]
 [connection signal="pressed" from="graphics/pause menu/ButtonsContainerMargin/ButtonsContainer/toMainMenu" to="." method="_on_to_main_menu_pressed"]
-[connection signal="pressed" from="graphics/win screen/replay" to="." method="_on_replay_pressed"]
-[connection signal="pressed" from="graphics/win screen/toMainMenu" to="." method="_on_to_main_menu_pressed"]
-[connection signal="pressed" from="graphics/lose screen/replay" to="." method="_on_replay_pressed"]
-[connection signal="pressed" from="graphics/lose screen/toMainMenu" to="." method="_on_to_main_menu_pressed"]
+[connection signal="pressed" from="graphics/win screen/ButtonsContainerMargin/ButtonsContainer/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/win screen/ButtonsContainerMargin/ButtonsContainer/toMainMenu" to="." method="_on_to_main_menu_pressed"]
+[connection signal="pressed" from="graphics/lose screen/ButtonsContainerMargin/ButtonsContainer/replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="graphics/lose screen/ButtonsContainerMargin/ButtonsContainer/toMainMenu" to="." method="_on_to_main_menu_pressed"]
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/check" to="." method="_on_check_pressed"]
 [connection signal="pressed" from="GameContainer/game/KeyboardMarginContainer/keyboard/erase" to="." method="_on_erase_pressed"]
 [connection signal="pressed" from="ControlsContainer/controls/pause" to="." method="_on_pause_pressed"]
