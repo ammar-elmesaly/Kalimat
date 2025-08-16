@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7wyrgv7j2ck3"
-path="res://.godot/imported/icon.png-5b39fc353a1a2bba021ad1a3339df6a0.ctex"
+uid="uid://8r054nkcy7vd"
+path="res://.godot/imported/ic_launcher_background.png-f8ac9beb68605bce7feed473560e2158.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://android-icons/icon.png"
-dest_files=["res://.godot/imported/icon.png-5b39fc353a1a2bba021ad1a3339df6a0.ctex"]
+source_file="res://android-icons/ic_launcher_background.png"
+dest_files=["res://.godot/imported/ic_launcher_background.png-f8ac9beb68605bce7feed473560e2158.ctex"]
 
 [params]
 

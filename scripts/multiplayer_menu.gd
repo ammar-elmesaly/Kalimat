@@ -90,4 +90,6 @@ func _on_to_main_menu_button_pressed() -> void:
 
 
 func _on_back_to_menu_pressed() -> void:
+	peer.close()
+	multiplayer.multiplayer_peer = null
 	get_tree().reload_current_scene()

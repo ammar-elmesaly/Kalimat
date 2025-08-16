@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cibbx86i106cx"
-path="res://.godot/imported/adaptive-foreground-multiplayer.png-e288e3620b4666d52227525852b70528.ctex"
+uid="uid://d0fjenoyx715n"
+path="res://.godot/imported/play_store_512.png-1282cde8655a0ffa50ba1bbf7d5e86a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://android-icons/adaptive-foreground-multiplayer.png"
-dest_files=["res://.godot/imported/adaptive-foreground-multiplayer.png-e288e3620b4666d52227525852b70528.ctex"]
+source_file="res://android-icons/play_store_512.png"
+dest_files=["res://.godot/imported/play_store_512.png-1282cde8655a0ffa50ba1bbf7d5e86a6.ctex"]
 
 [params]
 

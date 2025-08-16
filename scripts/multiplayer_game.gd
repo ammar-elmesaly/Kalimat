@@ -10,14 +10,14 @@ class RandomHintChar:
 		letter = _letter
 		index = _index
 
-@onready var empty = preload("res://resources/empty_slot.png")
-@onready var misplaced = preload("res://resources/misplaced_slot.png")
-@onready var right = preload("res://resources/right_slot.png")
-@onready var selected = preload("res://resources/selected_slot.png")
-@onready var wrong = preload("res://resources/wrong_slot.png")
+@onready var empty = preload("res://resources/icons/empty_slot.png")
+@onready var misplaced = preload("res://resources/icons/misplaced_slot.png")
+@onready var right = preload("res://resources/icons/right_slot.png")
+@onready var selected = preload("res://resources/icons/selected_slot.png")
+@onready var wrong = preload("res://resources/icons/wrong_slot.png")
 
-@onready var volumeOff = preload("res://resources/volume-mute.svg")
-@onready var volumeUp = preload("res://resources/volume-up.svg")
+@onready var volumeOff = preload("res://resources/icons/volume-mute.svg")
+@onready var volumeUp = preload("res://resources/icons/volume-up.svg")
 
 @onready var statusDict = {
 	"empty" : empty,
