@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Kalimat"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="uid://depps5xl7c0vf"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Utils="*res://scripts/utils.gd"
+StatsUtils="*res://scripts/statsUtils.gd"
 
 [display]
 
