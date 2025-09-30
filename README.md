@@ -1,4 +1,4 @@
-![Kalimat game logo](resources/Banner/kalimat-banner-full.png)
+![Kalimat game logo](resources/banner/kalimat-game-screenshot.png)
 
 # Kalimat
 
